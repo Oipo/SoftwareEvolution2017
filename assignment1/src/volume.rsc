@@ -59,21 +59,23 @@ int count_lines(loc file) {
 	
 	if(multiline_occurance < 0) {
 		total_without_comments = total;
-	}
-	
-	while(multiline_occurance >= 0) {
-		total_without_comments = total_without_comments + temp[0..multiline_occurance];
-		//println("total_without_comments = <total_without_comments>");
-		temp = temp[multiline_occurance+2..];
-		//println("temp = <temp>");
-		int ending = findFirst(temp, "*/");
-		if(ending < 0) {
-			println("ending, temp = <temp>");
-			break;
+	} else {
+		while(multiline_occurance >= 0) {
+			total_without_comments = total_without_comments + temp[0..multiline_occurance];
+			//println("total_without_comments = <total_without_comments>");
+			temp = temp[multiline_occurance+2..];
+			//println("temp = <temp>");
+			int ending = findFirst(temp, "*/");
+			if(ending < 0) {
+				println("ending, temp = <temp>");
+				temp = "";
+				break;
+			}
+			temp = temp[ending+2..];
+			//println("temp = <temp>");
+			multiline_occurance = findFirst(temp, "/*");
 		}
-		temp = temp[ending+2..];
-		//println("temp = <temp>");
-		multiline_occurance = findFirst(temp, "/*");
+		total_without_comments = total_without_comments + temp;
 	}
 	
 	for (line <- split("\n", total_without_comments)) {
