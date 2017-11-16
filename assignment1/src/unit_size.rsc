@@ -5,7 +5,8 @@ import lang::java::jdt::m3::Core;
 import lang::java::jdt::m3::AST;
 import IO;
 import String;
-import volume;
+import List;
+import code_filtering;
 
 // used https://www.sig.eu/files/en/090_Deriving_Metric_Thresholds_from_Benchmark_Data.pdf for thresholds
 int unit_size(loc proj) {
@@ -20,7 +21,7 @@ int unit_size(loc proj) {
 	for(method <- myMethods) {
 		int some_count = 0;
 		total_methods += 1;
-		some_count = count_lines(method);
+		some_count = size(get_actual_code(method));
 		if(some_count < 30) {
 			total_small += 1; 
 		} else if (some_count < 44) {
