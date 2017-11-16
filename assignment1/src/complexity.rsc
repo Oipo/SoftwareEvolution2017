@@ -5,6 +5,23 @@ import lang::java::m3::Core;
 import lang::java::jdt::m3::AST;
 import lang::java::jdt::m3::Core;
 
+list[tuple[str, list[tuple[str, int]]]] ccNumbers(M3 m) {
+	list[tuple[str, list[tuple[str, int]]]] complexities = [];
+	
+	for (file <- files(m)) {
+		Declaration ast = createAstFromFile(file, true);
+		list[tuple[str, int]] tempx = [];
+	
+		visit(ast) {
+			case \method(_, name, _, _, impl) : tempx += <"<name>", cyclomaticNumber(impl)>;
+		}
+		
+		complexities += <"<file>", tempx>;
+	}
+	
+	return complexities;
+}
+
 // TODO methods with the same name
 list[tuple[str, int]] cyclomaticNumbers(loc project) {
 	list[tuple[str, int]] complexities = [];
