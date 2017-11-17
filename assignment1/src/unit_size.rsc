@@ -30,7 +30,6 @@ int unit_size(M3 myModel) {
 		}
 		//println("method = <method>, total_complexity = <total_complexity>, total_methods = <total_methods>");
 	}
-	// todo figure out the threshold values for unit sizes to determine ranking
 	println("total = <total_methods>, small = <total_small>, mediocre = <total_mediocre>, large = <total_large>, <toReal(total_small)/total_methods*100>, <toReal(total_mediocre)/total_methods*100>, <toReal(total_large)/total_methods*100>");
 	return 0;
 }

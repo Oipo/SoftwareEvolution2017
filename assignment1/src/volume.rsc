@@ -1,31 +1,21 @@
 module volume
 
+import lang::java::m3::Core;
+import lang::java::jdt::m3::Core;
 import IO;
 import String;
 import List;
 import code_filtering;
+import misc;
   
 int get_volume(loc dir) {
 	int lines_of_code = 0;
+	list[loc] files = get_files(dir);
 	
-	if (!isDirectory(dir)) {
-		if (/\.java$/ := dir.file) {
-			int lines = size(get_actual_code(file));
-			println("<dir> <lines>");
-			return lines;
-		} else {
-			return 0;
-		}
-	}
-	
-	for (file <- dir.ls) {
-		if (isDirectory(file)) {
-			lines_of_code += get_volume(file);
-		} else if (/\.java$/ := file.file) {
-			int lines = size(get_actual_code(file));
-			println("<file> <lines>");
-			lines_of_code += lines;
-		}
+	for (file <- files) {
+		int lines = size(get_actual_code(file));
+		println("<file> <lines>");
+		lines_of_code += lines;
 	}
 
 	return lines_of_code;
