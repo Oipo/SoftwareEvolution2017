@@ -10,8 +10,7 @@ import Set;
 import code_filtering;
 import misc;
 
-int code_duplication(loc dir) {
-	list[loc] javaFiles = get_files(dir);
+int code_duplication(list[loc] javaFiles) {
 	list[str] lines = [];
 	set[int] duplicatedLines = {};
 	
@@ -30,13 +29,23 @@ int code_duplication(loc dir) {
 				lines[x+4] == lines[y+4] &&
 				lines[x+5] == lines[y+5]) {
 				duplicatedLines += x;
+				duplicatedLines += x+1;
+				duplicatedLines += x+2;
+				duplicatedLines += x+3;
+				duplicatedLines += x+4;
+				duplicatedLines += x+5;
 				duplicatedLines += y;
+				duplicatedLines += y+1;
+				duplicatedLines += y+2;
+				duplicatedLines += y+3;
+				duplicatedLines += y+4;
+				duplicatedLines += y+5;
 			}
 		}
-		if(x % 10 == 0) {
+		if(x % 20 == 0) {
 			println("<x> <size(lines)>");
 		}
 	}
 	
-	return size(duplicatedLines);
+	return round(toReal(size(duplicatedLines))/size(lines)*100);
 }

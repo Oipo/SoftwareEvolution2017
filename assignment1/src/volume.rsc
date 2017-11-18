@@ -8,9 +8,8 @@ import List;
 import code_filtering;
 import misc;
   
-int get_volume(loc dir) {
+int get_volume(list[loc] files) {
 	int lines_of_code = 0;
-	list[loc] files = get_files(dir);
 	
 	for (file <- files) {
 		int lines = size(get_actual_code(file));
