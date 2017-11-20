@@ -17,7 +17,6 @@ tuple[int, real, real, real, real] unit_size(M3 myModel, int total_loc) {
 	int total_large = 0;
 	int total_very_large = 0;
 	int total_methods = 0;
-	int total_complexity = 0;
 	
 	int small_threshold = round(total_loc * 0.002);
 	int medium_threshold = round(total_loc * 0.006);
@@ -38,7 +37,6 @@ tuple[int, real, real, real, real] unit_size(M3 myModel, int total_loc) {
 		} else {
 			total_very_large += 1;
 		}
-		//println("method = <method>, total_complexity = <total_complexity>, total_methods = <total_methods>");
 	}
 	println("total = <total_methods>, small = <total_small>, medium = <total_medium>, large = <total_large>, very_large = <total_very_large>, <toReal(total_small)/total_methods*100>% small, <toReal(total_medium)/total_methods*100>% average, <toReal(total_large)/total_methods*100>% large, <toReal(total_very_large)/total_methods*100>% very_large");
 	return <total_methods, toReal(total_small)/total_methods*100, toReal(total_medium)/total_methods*100, toReal(total_large)/total_methods*100, toReal(total_very_large)/total_methods*100>;

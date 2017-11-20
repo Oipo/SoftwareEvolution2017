@@ -10,7 +10,7 @@ import Set;
 import code_filtering;
 import misc;
 
-int code_duplication(list[loc] javaFiles) {
+tuple[int, int] code_duplication(list[loc] javaFiles) {
 	list[str] lines = [];
 	set[int] duplicatedLines = {};
 	
@@ -47,5 +47,5 @@ int code_duplication(list[loc] javaFiles) {
 		}
 	}
 	
-	return round(toReal(size(duplicatedLines))/size(lines)*100);
+	return <size(duplicatedLines), round(toReal(size(duplicatedLines))/size(lines)*100)>;
 }

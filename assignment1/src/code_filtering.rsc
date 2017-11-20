@@ -34,8 +34,6 @@ bool is_inside_string(str total, int pos) {
 }
 
 list[str] get_actual_code(loc file) {
-	int lines = 0;
-	
 	str total = readFile(file);
 	int multiline_opening = findFirst(total, "/*");
 	int multiline_ending = -1;

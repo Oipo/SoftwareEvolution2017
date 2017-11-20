@@ -20,9 +20,9 @@ void get_metrics(M3 m) {
 	list[loc] javaFiles = toList(files(m));
 	
 	int lines_of_code = get_volume(javaFiles);
-	//int complexity = average_of(ccNumbers(javaFiles));
+	tuple[int, real, real, real, real] complexity = distribution_of_complexity(ccNumbers(m));
 	tuple[int, real, real, real, real] unit_size = unit_size(m, lines_of_code);
-	int duplicated = code_duplication(javaFiles);
+	tuple[int, int] duplicated = code_duplication(javaFiles);
 	
 	str score_loc = "";
 	str score_complexity = "";
@@ -53,13 +53,25 @@ void get_metrics(M3 m) {
 		score_unit_size = "++"; 
 	}
 	
-	if(duplicated >= 20) {
+	if(complexity[4] > 5 || complexity[3] > 15 || complexity[2] > 50) {
+		score_complexity = "--";
+	} else if(complexity[4] > 0 || complexity[3] > 10 || complexity[2] > 40) {
+		score_complexity = "-";
+	} else if(complexity[3] > 5 || complexity[2] > 30) {
+		score_complexity = "o";
+	} else if(complexity[3] > 0 || complexity[2] > 25) {
+		score_complexity = "+";
+	} else {
+		score_complexity = "++"; 
+	}
+	
+	if(duplicated[1] >= 20) {
 		score_duplication = "--";
-	} else if(duplicated >= 10) {
+	} else if(duplicated[1] >= 10) {
 		score_duplication = "-";
-	} else if(duplicated >= 5) {
+	} else if(duplicated[1] >= 5) {
 		score_duplication = "o";
-	} else if(duplicated >= 3) {
+	} else if(duplicated[1] >= 3) {
 		score_duplication = "+";
 	} else {
 		score_duplication = "++";
@@ -68,6 +80,7 @@ void get_metrics(M3 m) {
 	println("metrics:");
 	println("lines of code: <lines_of_code>");
 	println("unit size: <unit_size>");
+	println("complexity: <complexity>");
 	println("duplicated code: <duplicated>");
 	
 	println("");
@@ -75,5 +88,6 @@ void get_metrics(M3 m) {
 	println("scores:");
 	println("lines of code: <score_loc>");
 	println("unit size: <score_unit_size>");
+	println("complexity: <score_complexity>");
 	println("duplicated code: <score_duplication>");
 }
