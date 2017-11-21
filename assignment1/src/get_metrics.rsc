@@ -33,7 +33,7 @@ void get_metrics(M3 m) {
 	int lines_of_code = get_volume(javaFiles);
 	tuple[int, real, real, real, real] complexity = distribution_of_complexity(ccNumbers(m));
 	tuple[int, real, real, real, real] unit_size = unit_size(m, lines_of_code);
-	tuple[int, int] duplicated = code_duplication2(javaFiles);
+	tuple[int, real] duplicated = code_duplication2(javaFiles);
 	
 	int score_loc = -3;
 	int score_complexity = -3;

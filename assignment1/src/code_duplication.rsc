@@ -11,7 +11,7 @@ import Map;
 import code_filtering;
 import misc;
 
-tuple[int, int] code_duplication2(list[loc] javaFiles) {
+tuple[int, real] code_duplication2(list[loc] javaFiles) {
 	list[str] lines = [];
 	int total_lines = 0;
 	set[int] duplicatedLines = {};
@@ -50,7 +50,7 @@ tuple[int, int] code_duplication2(list[loc] javaFiles) {
 		}
 	}
 	
-	return <size(duplicatedLines), round(toReal(size(duplicatedLines))/total_lines*100)>;
+	return <size(duplicatedLines), toReal(size(duplicatedLines))/total_lines*100>;
 }
 
 tuple[int, int] code_duplication_slow(list[loc] javaFiles) {
