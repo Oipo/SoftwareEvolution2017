@@ -7,10 +7,53 @@ import IO;
 import String;
 import List;
 import Set;
+import Map;
 import code_filtering;
 import misc;
 
-tuple[int, int] code_duplication(list[loc] javaFiles) {
+tuple[int, int] code_duplication2(list[loc] javaFiles) {
+	list[str] lines = [];
+	int total_lines = 0;
+	set[int] duplicatedLines = {};
+	
+	for(f <- javaFiles) {
+		l = get_actual_code(f);
+		total_lines += size(l);
+		
+		lines += l;
+		//println("<method> <size(l)>");
+	}
+	
+	println(total_lines);
+	
+	map[list[str], list[int]] hashmap = ();
+	for(x <- [0..size(lines)-6]) {
+		if(lines[x..x+6] in hashmap) {
+			hashmap[lines[x..x+6]] += x;
+		} else {
+			hashmap[lines[x..x+6]] = [x];
+		}
+	}
+	
+	for(key <- hashmap) {
+		if(size(hashmap[key]) > 1) {
+			//println("line1 = <lines[hashmap[key][0]..hashmap[key][0]+6]>");
+			//println("line2 = <lines[hashmap[key][1]..hashmap[key][1]+6]>");
+			for(x <- hashmap[key]) {
+				duplicatedLines += x;
+				duplicatedLines += x+1;
+				duplicatedLines += x+2;
+				duplicatedLines += x+3;
+				duplicatedLines += x+4;
+				duplicatedLines += x+5;
+			}
+		}
+	}
+	
+	return <size(duplicatedLines), round(toReal(size(duplicatedLines))/total_lines*100)>;
+}
+
+tuple[int, int] code_duplication_slow(list[loc] javaFiles) {
 	list[str] lines = [];
 	set[int] duplicatedLines = {};
 	
