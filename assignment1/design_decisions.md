@@ -2,7 +2,18 @@
 
 ## Volume
 
+- Only count lines actually in eclipse project
+- Assume that multi line comments always have an ending, otherwise potentially too many lines may be filtered
+- Doesn't use regexes because regexes are hard to make correct as well as slower than findFirst/Last/All
+
 ## Unit size
+
+- used https://www.sig.eu/files/en/090_Deriving_Metric_Thresholds_from_Benchmark_Data.pdf for thresholds
+- These changes mean that unit size is relative to LOC of the project.
+- small threshold is all units less than 0.2% of total LOC
+- moderate threshold is all units >= 0.2% and < 0.6% of total LOC
+- large threshold is all units >= 0.6% and < 1% of total LOC
+- very large is >= 1% of total LOC
 
 ## Complexity
 At first we decided to create an AST for every file in the M3 model, but creating the AST directly from the eclipse project was about 5 seconds faster for both eclipse projects (likely because of less overhead).
@@ -16,3 +27,7 @@ We decided to increase the complexity for every logical and and logicol or in th
 We decided to take the total volume of all methods instead of the whole eclipse project when determing the cyclomatic complexity rating, because we think it would be a more accurate representation.
 
 ## Code duplication
+
+- Count both original and duplicated code as duplicates, impossible to know which of the two is the actual original
+- Currently uses whole files which means it includes all import statements and may mark those as duplicate, even though that information isn't actually useful. Using methods instead of files is an easy change.
+- Makes a hash of each combination of 6 lines and checks if there's a hash collision, if so, marks them as duplicates.
