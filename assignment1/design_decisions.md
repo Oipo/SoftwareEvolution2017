@@ -1,3 +1,9 @@
+# Results
+
+## smallsql0.21_src
+
+## hsqldb
+
 # Design decisions
 
 ## Volume
@@ -8,12 +14,17 @@
 
 ## Unit size
 
-- used https://www.sig.eu/files/en/090_Deriving_Metric_Thresholds_from_Benchmark_Data.pdf for thresholds
-- These changes mean that unit size is relative to LOC of the project.
-- small threshold is all units less than 0.2% of total LOC
-- moderate threshold is all units >= 0.2% and < 0.6% of total LOC
-- large threshold is all units >= 0.6% and < 1% of total LOC
-- very large is >= 1% of total LOC
+- used https://www.sig.eu/files/en/090_Deriving_Metric_Thresholds_from_Benchmark_Data.pdf [1] for thresholds since these calculated new thresholds based on multiple projects and found that these metrics are more resilient to large system outliers. Look for Table IV for the new metrics.
+
+- The results for smallsql change from
+	81.25% small, 9.21% moderate, 7.46% high, 2.08% very high
+  to
+  	97.58% small, 2.13% moderate, 0.21% high, 0.08% very high
+
+- The results for hsqldb change from
+	67.53% small, 16.44% moderate, 11.33% high, 4.70% very high
+  to
+  	99.84% small, 00.15% moderate, 00.01% high, 0.00% very high
 
 ## Complexity
 At first we decided to create an AST for every file in the M3 model, but creating the AST directly from the eclipse project was about 5 seconds faster for both eclipse projects (likely because of less overhead).
@@ -32,7 +43,7 @@ We decided to take the total volume of all methods instead of the whole eclipse 
 - Currently uses whole files which means it includes all import statements and may mark those as duplicate, even though that information isn't actually useful. Using methods instead of files is an easy change.
 - Makes a hash of each combination of 6 lines and checks if there's a hash collision, if so, marks them as duplicates.
 
-
+// TODO
 - Put in report difference between new and old unit size metrics
 - Why put operators in separate funtion, does it have an impact at all?
 - Why would switch cases count? Put in report.
@@ -41,4 +52,22 @@ We decided to take the total volume of all methods instead of the whole eclipse 
 - Put in results 
 - How long did it take
 - Threats to validity and how it was addressed
-- 
+// TODO
+
+# threats to validity
+
+- Java 7 will support things such as multiline strings, which are not accounted for in this project, future versions might change syntax rules further.
+- Original paper wasn't explicit enough about some metrics, leading to potential deviations
+- New papers (such as the one we used for unit size) might change metric definitions or worse, deprecate them.
+- Implementation might be buggy, more tests should be added to mitigated that.
+
+# time taken
+
+- Michael: 80 hours
+- Constantijn: ?? hours
+
+# References
+
+[1] T. L. Alves, C. Ypma and J. Visser, "Deriving metric thresholds from benchmark data," 2010 IEEE International Conference on Software Maintenance, Timisoara, 2010, pp. 1-10.
+doi: 10.1109/ICSM.2010.5609747
+URL: http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5609747&isnumber=5609528
