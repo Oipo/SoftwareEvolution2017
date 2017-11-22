@@ -10,6 +10,7 @@ import volume;
 import code_duplication;
 import unit_size;
 import complexity;
+import cohesion;
 import misc;
 
 str int_to_score(int score) {
@@ -31,6 +32,7 @@ void get_metrics(loc project) {
 	tuple[int, real, real, real, real] complexity = ccRating(project);
 	tuple[int, real, real, real, real] unit_size = unit_size(m, lines_of_code);
 	tuple[int, real] duplicated = code_duplication2(javaFiles);
+	list[real] cohesions = cohesion(project);
 	
 	int score_loc = -3;
 	int score_complexity = -3;
@@ -90,6 +92,7 @@ void get_metrics(loc project) {
 	println("unit size: <unit_size>");
 	println("complexity: <complexity>");
 	println("duplicated code: <duplicated>");
+	println("cohesion (avg of all classes): <sum(cohesions)/size(cohesions)>");
 	
 	println("");
 	
