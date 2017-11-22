@@ -18,9 +18,15 @@ tuple[int, real, real, real, real] unit_size(M3 myModel, int total_loc) {
 	int total_very_large = 0;
 	int total_methods = 0;
 	
-	int small_threshold = round(total_loc * 0.002);
-	int medium_threshold = round(total_loc * 0.006);
-	int large_threshold = round(total_loc * 0.01); 
+	// new metric thresholds
+	int small_threshold = 30;
+	int medium_threshold = 44;
+	int large_threshold = 74;
+	
+	// old metric thresholds
+	//int small_threshold = 11;
+	//int medium_threshold = 21;
+	//int large_threshold = 51;
 	
 	println("<small_threshold> <medium_threshold> <large_threshold>");
 	
