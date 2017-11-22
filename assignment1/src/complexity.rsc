@@ -5,6 +5,7 @@ import lang::java::m3::Core;
 import lang::java::jdt::m3::AST;
 import lang::java::jdt::m3::Core;
 import util::Math;
+import volume;
 
 tuple[int, real, real, real, real] distribution_of_complexity(list[tuple[str, list[tuple[str, int]]]] complexities) {
 	int total_small = 0;
@@ -37,41 +38,69 @@ tuple[int, real, real, real, real] distribution_of_complexity(list[tuple[str, li
 	return <total_methods, toReal(total_small)/total_methods*100, toReal(total_medium)/total_methods*100, toReal(total_large)/total_methods*100, toReal(total_very_large)/total_methods*100>;
 }
 
-list[tuple[str, list[tuple[str, int]]]] ccNumbers(M3 m) {
-	list[tuple[str, list[tuple[str, int]]]] complexities = [];
+list[real] ccRating(M3 m) {
+	list[real] ratings = [0.0,0.0,0.0]; // [very high, high, moderate]
+	int volume = 0;
+	int total_volume = 0;
+
+	for (unit <- ccNumbers2(m)) {
+		volume = get_volume([unit[0]]);
+		total_volume += volume; 
+		
+		if (unit[1] > 50) {
+			ratings[0] += volume;
+		} else if (unit[1] > 20) {
+			ratings[1] += volume;
+		} else if (unit[1] > 10) {
+			ratings[2] += volume;
+		}
+	}
+	
+	// TODO divide by zero
+	for (i <- [0..3]) {
+		ratings[i] /= total_volume;
+	}
+	
+	return ratings;
+}
+
+list[tuple[loc, int]] ccNumbers2(M3 m) {
+	list[tuple[loc, int]] complexities = [];
+	
+	for (file <- files(m)) {
+		Declaration ast = createAstFromFile(file, true);
+
+		visit(ast) {
+			case \method(_, name, _, _, impl) : complexities += <file, ccStatement(impl)>;
+			case \constructor(name, _, _, Statement impl) : complexities += <file, ccStatement(impl)>;
+		}
+	}
+	
+	return complexities;
+}
+
+list[tuple[loc, list[tuple[str, int]]]] ccNumbers(M3 m) {
+	list[tuple[loc, list[tuple[str, int]]]] complexities = [];
 	
 	for (file <- files(m)) {
 		Declaration ast = createAstFromFile(file, true);
 		list[tuple[str, int]] tempx = [];
 	
 		visit(ast) {
-			case \method(_, name, _, _, impl) : tempx += <"<name>", cyclomaticNumber(impl)>;
-			case \constructor(name, _, _, Statement impl) : tempx += <"<name>", cyclomaticNumber(impl)>;
+			case \method(_, name, _, _, impl) : tempx += <"<name>", ccStatement(impl)>;
+			case \constructor(name, _, _, Statement impl) : tempx += <"<name>", ccStatement(impl)>;
 		}
 		
-		complexities += <"<file>", tempx>;
+		complexities += <file, tempx>;
 	}
 	
 	return complexities;
 }
 
-// TODO methods with the same name
-list[tuple[str, int]] cyclomaticNumbers(loc project) {
-	list[tuple[str, int]] complexities = [];
-	set[Declaration] decls = createAstsFromEclipseProject(project, true);
 
-	for (body <- [[methodName, methodBody] | /c:\method(_, methodName, _, _, methodBody) := decls]) {
-		complexities += <"<body[0]>", cyclomaticNumber(body[1])>;
-	}
-
-	return complexities;
-}
-
-
-int cyclomaticNumber(value methodBody) {
+int ccStatement(value methodBody) {
 	int complexity = 1;
-		
-	 //TODO always does the same in every case
+
 	visit(methodBody) {
 		case \do(_, condition)			: complexity += 1 + ccExpression(condition);
 		case \foreach(_, _, _)			: complexity += 1;
@@ -93,30 +122,16 @@ int ccExpression(value expr) {
 	int complexity = 0;
 	
 	visit(expr) {
-		case \infix(_, operator, _) : complexity += ccOperator(operator);
+		case \infix(_, operator, _)	: complexity += ccOperator(operator);
 	}
 	
 	return complexity;
 }
 
 int ccOperator(str operator) {
-	if (operator == "||" || operator == "&&") {
-		return 1;
+	switch (operator) {
+		case "||"	: return 1;
+		case "&&"	: return 1;
 	}
 	return 0;
-}
-
-int test1(set[Declaration] ast) {
-	visit(ast) {
-		case \class(name, extends1, implements, body)	: {print("<name>\n"); test2(body);}
-		
-	}
-	return 1;
-}
-
-int test2(value body) {
-	visit(body) {
-		case \method(_, name, _, _, _) : print("\t<name>\n");
-	}
-	return 1;
 }
