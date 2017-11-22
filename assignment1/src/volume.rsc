@@ -13,7 +13,7 @@ int get_volume(list[loc] files) {
 	
 	for (file <- files) {
 		int lines = size(get_actual_code(file));
-		println("<file> <lines>");
+		//println("<file> <lines>");
 		lines_of_code += lines;
 	}
 

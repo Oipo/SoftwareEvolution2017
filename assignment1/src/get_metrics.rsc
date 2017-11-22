@@ -12,11 +12,6 @@ import unit_size;
 import complexity;
 import misc;
 
-void get_metrics(loc project) {
-	M3 m = createM3FromEclipseProject(project);
-	get_metrics(m);
-}
-
 str int_to_score(int score) {
 	switch(score) {
 		case -2: return "--";
@@ -27,11 +22,13 @@ str int_to_score(int score) {
 	}
 }
 
-void get_metrics(M3 m) {
+void get_metrics(loc project) {
+	M3 m = createM3FromEclipseProject(project);
+	
 	list[loc] javaFiles = toList(files(m));
 	
 	int lines_of_code = get_volume(javaFiles);
-	tuple[int, real, real, real, real] complexity = distribution_of_complexity(ccNumbers(m));
+	tuple[int, real, real, real, real] complexity = ccRating(project);
 	tuple[int, real, real, real, real] unit_size = unit_size(m, lines_of_code);
 	tuple[int, real] duplicated = code_duplication2(javaFiles);
 	
