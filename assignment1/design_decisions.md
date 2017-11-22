@@ -31,3 +31,14 @@ We decided to take the total volume of all methods instead of the whole eclipse 
 - Count both original and duplicated code as duplicates, impossible to know which of the two is the actual original
 - Currently uses whole files which means it includes all import statements and may mark those as duplicate, even though that information isn't actually useful. Using methods instead of files is an easy change.
 - Makes a hash of each combination of 6 lines and checks if there's a hash collision, if so, marks them as duplicates.
+
+
+- Put in report difference between new and old unit size metrics
+- Why put operators in separate funtion, does it have an impact at all?
+- Why would switch cases count? Put in report.
+- LOC counting, toevoegen rudimentary tests, wat zijn de corner cases?
+- Add one or two new metrics based on new sig paper and put this in the report
+- Put in results 
+- How long did it take
+- Threats to validity and how it was addressed
+- 
