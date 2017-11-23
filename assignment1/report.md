@@ -45,6 +45,15 @@ changeability: --
 stability: N/A
 testability: -
 ```
+
+## tests
+```
+rascal>:test
+Running tests for lines_of_code_test
+Test report for lines_of_code_tests                                                       
+        all 1/1 tests succeeded
+```
+
 # Design decisions
 
 ## Volume
