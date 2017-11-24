@@ -81,11 +81,11 @@ The idea here is that larger projects have a higher chance of creating methods i
 ## Complexity
 At first we decided to create an AST for every file in the M3 model, but creating the AST directly from the eclipse project was about 5 seconds faster for both eclipse projects (likely because of less overhead).
 
-We visit the tree twice once for methods and constructors and once for specific statements, because we to be able to match the complexity we get from statements to the unit (method or constructor) it belongs to.
+The tree is visited twice. Once for the methods and constructors and once for the specific statements that add to the complexity, because to allows us to match the complexity we get from statements to the unit (method or constructor) it belongs to.
 
-We decided to only include statements to increase the complexity that cause another branch in the control flow of an unit. (McCabe)
+We decided to only include statements to increase the complexity that cause another branch in the control flow of an unit. So for a switch each case would add another branch, because each case would follow different branch. If none of the cases in the switch match, it follows another branch which is why the switch statement itself also adds to the complexity. This branch would be different if a default case would be included in the switch, but the number of branches would not change thus the default case can ignored since it is optional and only the switch statement increases the complexity.
 
-We decided to increase the complexity for every logical and and logicol or in the condition of a statement, because it creates another branch in the control flow of an unit. (Jurgen Vinju)
+It was decided to increase the complexity for every logical and and logical or operator only when it appears in the condition of a statement. However, this was done under the wrong assumption that only branching occurs by these operators when used in a condition. This assumption after later evaluaton is wrong, because the branching by these operators can occur outside of conditions as well. This could be easily fixed by merging `ccExpression` into `ccStatement` and removing the function calls to `ccExpression`.
 
 We decided to take the total volume of all methods instead of the whole eclipse project when determing the cyclomatic complexity rating, because we think it would be a more accurate representation.
 
@@ -109,7 +109,7 @@ We decided to take the total volume of all methods instead of the whole eclipse 
 # time taken
 
 - Michael: 80 hours
-- Constantijn: ?? hours
+- Constantijn: 60 hours
 
 # References
 
