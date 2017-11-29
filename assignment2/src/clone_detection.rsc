@@ -17,6 +17,8 @@ void clones(set[Declaration] ast) {
 	for (key <- hash) {
 		for (i <- hash[key]) {
 			for (j <- hash[key]) {
+				
+			
 				return;
 			}
 		}
