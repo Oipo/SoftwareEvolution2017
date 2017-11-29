@@ -7,7 +7,9 @@ import lang::java::jdt::m3::Core;
 import List;
 
 void clones(set[Declaration] ast) {
-	map[list[Statement], list[list[Statement]]] hash();
+	//list[tuple[loc, loc]] clones = [];
+	list[tuple[value, value]] clones = [];
+	map[int, list[list[Statement]]] hash = ();
 
 	visit (ast) {
 		//case \block(statements)	: {println(size(flattenStatements(statements)));}
@@ -17,21 +19,45 @@ void clones(set[Declaration] ast) {
 	for (key <- hash) {
 		for (i <- hash[key]) {
 			for (j <- hash[key]) {
-				
-			
-				return;
+				if (compareStatements(i, j)) {
+					for (subStatement <- subStatements(i)) {
+						// remove from clones
+						return;
+					}
+					
+					clones += <i, j>; // TODO get locs of i and j
+				}
 			}
 		}
 	}
 }
 
-void insertBucket(map[list[Statement], list[list[Statement]]] hash, list[Statement] statements) {
+bool compareStatements(list[Statement] i, list[Statement] j) {
+	//visit(i) {
+	//	case \
+	//}
+	
+	return true;
+}
+
+list[Statement] subStatements(list[Statement] statements) {
+	list[Statement] subStmts = [];
+	
+	for (statement <- statements) {
+		subStmts += [stmts | /\block(stmts) := statement];
+	}
+	
+	return subStmts;
+}
+
+void insertBucket(map[int, list[list[Statement]]] hash, list[Statement] statements) {
 	flattenedStatements = flattenStatements(statements);
+	int key = size(flattenedStatements);
 
 	if (flattenedStatements in hash) {
-		hash[flattenedStatements] += flattenedStatements;
+		hash[key] += flattenedStatements;
 	} else {
-		hash[flattenedStatements] = flattenedStatements;
+		hash[key] = flattenedStatements;
 	}
 }
 
@@ -54,32 +80,43 @@ void printBlock(list[Statement] statements) {
 	println("End block");
 }
 
-list[Statement] flattenStatements(list[Statement] statements) {
-	list[Statement] flatten = [];
+int insertMaptrix(list[value] values, int depth, int column) {
+	for (v <- values) {
+		maptrix[depth][column] = v;
+		astToMatrix(v, depth + 1);
+		column += 1;
+	}
+}
+
+map[int, map[int, list[value]]]  astToMaptrix(list[value] statements, int depth) {
+	map[int, map[int, list[value]]] maptrix = ();
 	int maxThreshold = 100;
+	int column = 0;
 	
 	if (size(statements) > maxThreshold) {
 		return flatten;
 	}
-	
+
 	for (statement <- statements) {
 		if (size(flatten) <= maxThreshold) {
 			visit (statement) {
-				case \block(statements)					: flatten += statement + flattenStatements(statements);
-				case \do(body, _)						: flatten += statement + flattenStatements([body]);
-				case \foreach(_, _, body)				: flatten += statement + flattenStatements([body]);
-				case \for(_, _, _, body)				: flatten += statement + flattenStatements([body]);
-				case \for(_, _, body)					: flatten += statement + flattenStatements([body]);
-				case \if(_, body)						: flatten += statement + flattenStatements([body]);
-				case \if(_, body1, body2)				: flatten += statement + flattenStatements([body1, body2]);
-				case \label(_, body)					: flatten += statement + flattenStatements([body]);
-				case \switch(_, statements)				: flatten += statement + flattenStatements(statements);
-				case \synchronizedStatement(_, body)	: flatten += statement + flattenStatements([body]);
-				case \try(body, catchClauses)			: flatten += statement + flattenStatements(catchClauses + body);
-				case \try(body, catchClauses, \finally)	: flatten += statement + flattenStatements(catchClauses + body + \finally);
-				case \catch(_, body)					: flatten += statement + flattenStatements([body]);
-				case \while(_, body)					: flatten += statement + flattenStatements([body]);
-				default									: flatten += statement; 
+				case \do(body, condition)				: {maptrix[depth][column] = astToMaptrix(body, depth + 1); maptrix[depth][column + 1] = astToMaptrix(condition, depth + 1); column += 2;} 
+			
+				//case \block(statements)					: flatten += statement + flattenStatements(statements);
+				//case \do(body, _)						: flatten += statement + flattenStatements([body]);
+				//case \foreach(_, _, body)				: flatten += statement + flattenStatements([body]);
+				//case \for(_, _, _, body)				: flatten += statement + flattenStatements([body]);
+				//case \for(_, _, body)					: flatten += statement + flattenStatements([body]);
+				//case \if(_, body)						: flatten += statement + flattenStatements([body]);
+				//case \if(_, body1, body2)				: flatten += statement + flattenStatements([body1, body2]);
+				//case \label(_, body)					: flatten += statement + flattenStatements([body]);
+				//case \switch(_, statements)				: flatten += statement + flattenStatements(statements);
+				//case \synchronizedStatement(_, body)	: flatten += statement + flattenStatements([body]);
+				//case \try(body, catchClauses)			: flatten += statement + flattenStatements(catchClauses + body);
+				//case \try(body, catchClauses, \finally)	: flatten += statement + flattenStatements(catchClauses + body + \finally);
+				//case \catch(_, body)					: flatten += statement + flattenStatements([body]);
+				//case \while(_, body)					: flatten += statement + flattenStatements([body]);
+				//default									: flatten += statement; 
 			}
 		} else {
 			break;
@@ -88,6 +125,8 @@ list[Statement] flattenStatements(list[Statement] statements) {
 	
 	return flatten;
 }
+
+
 void basicCloneDetection(list[int] statements) {
 	for (statement <- statements) {
 		return;
