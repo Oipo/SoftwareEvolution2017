@@ -10,49 +10,45 @@ import Set;
 import Node;
 
 void clones(set[Declaration] ast) {
-	//list[tuple[loc, loc]] clones = [];
-	list[tuple[value, value]] clones = [];
+	set[tuple[loc, loc]] clones = {};
 	map[int, list[tuple[Statement, Statement]]] hash = ();
-
-	visit (ast) {
-		//case \block(statements)	: {println(size(flattenStatements(statements)));}
-		case /b: \block(statements)	: {
-			int key = countStatements(statements);
+	list[tuple[Statement, Statement]] bs = [<b, unsetRec(b)> | /b: \block(_) := ast];
+	
+	int minStmts = 3;
+	int maxStmts = 400;
+	
+	for (b <- bs) {
+		int key = countStatements([b[0]]);
 			
-			if(key >= 3 && key <= 400) {
-				if (key in hash) {
-					hash[key] += <b, unsetRec(b)>;
-				} else {
-					hash[key] = [<b, unsetRec(b)>];
-				}
+		if(key >= minStmts && key <= maxStmts) {
+			if (key in hash) {
+				hash[key] += b;
+			} else {
+				hash[key] = [b];
 			}
 		}
-	}
-	
+	}	
 	
 	for (key <- sort(domain(hash))) {
-		//println(key);
 		if(size(hash[key]) > 1) {
 			for (i <- hash[key]) {
 				for (j <- hash[key]) {
-					//println("ij");
 					if (compareStatements(i, j)) {
-						//println("compared");
 						for (subStatement <- subStatements(i[0])) {
-							println(<i[0].src, subStatement>);
-							clones = [x | x <- clones, x[0] != subStatement && x[1] != subStatement];
+							//println(<i[0].src, subStatement>);
+							clones = {x | x <- clones, x[0] != subStatement && x[1] != subStatement};
 						}
 						
-						//println("clone added");
-						clones += <i[0].src, j[0].src>; // TODO get locs of i and j
+						clones += <i[0].src, j[0].src>;
 					}
 				}
 			}
 		}
-		println(key);
+		println("key:\t<key>");
 	}
-	println(size(hash));
-	println(size(clones));
+	println("\ndone\n");
+	println("size hash:\t<size(hash)>");
+	println("size clones:\t<size(clones)>");
 	for(clone <- clones) {
 		println("clone = <clone>");
 	}
@@ -68,27 +64,6 @@ list[loc] subStatements(Statement blck) {
 	} 
 	
 	return [];
-}
-
-//void insertBucket(map[int, list[Statement]] hash, list[Statement] statements) {
-//	flattenedStatements = flattenStatements(statements);
-//	int key = size(flattenedStatements);
-//
-//	if (key in hash) {
-//		hash[key] += statements;
-//	} else {
-//		hash[key] = statements;
-//	}
-//}
-
-void printBlock(list[Statement] statements) {
-	println("Begin block");
-	
-	for (statement <- statements) {
-		println(statement.src);
-	}
-	
-	println("End block");
 }
 
 int countStatements(list[Statement] statements) {
