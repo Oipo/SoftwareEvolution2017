@@ -7,6 +7,7 @@ import lang::java::jdt::m3::Core;
 import List;
 import Map;
 import Set;
+import Node;
 
 void clones(set[Declaration] ast) {
 	//list[tuple[loc, loc]] clones = [];
@@ -15,28 +16,32 @@ void clones(set[Declaration] ast) {
 
 	visit (ast) {
 		//case \block(statements)	: {println(size(flattenStatements(statements)));}
-		case \block(statements)	: {
-			flattenedStatements = flattenStatements(statements);
-			int key = size(flattenedStatements);
-		
-			if (key in hash) {
-				hash[key] += statements;
-			} else {
-				hash[key] = statements;
+		case /b: \block(statements)	: {
+			unsetRec(b);
+			statements = [unsetRec(x) | x <- statements];
+			int key = countStatements(statements);
+			if(key >= 3 && key <= 100) {
+				if (key in hash) {
+					hash[key] += statements;
+				} else {
+					hash[key] = statements;
+				}
 			}
 		}
 	}
 	
 	for (key <- hash) {
-		for (i <- hash[key]) {
-			for (j <- hash[key]) {
-				if (i.src != j.src && compareStatements(i, j)) {
-					//for (subStatement <- subStatements(i)) {
-					//	// remove from clones
-					//	return;
-					//}
-					
-					clones += <i.src, j.src>; // TODO get locs of i and j
+		if(size(hash[key]) > 1) {
+			for (i <- hash[key]) {
+				for (j <- hash[key]) {
+					if (compareStatements(i, j)) {
+						//for (subStatement <- subStatements(i)) {
+						//	// remove from clones
+						//	return;
+						//}
+						
+						clones += <i.src, j.src>; // TODO get locs of i and j
+					}
 				}
 			}
 		}
@@ -87,37 +92,28 @@ void printBlock(list[Statement] statements) {
 	println("End block");
 }
 
-list[Statement] flattenStatements(list[Statement] statements) {
-	list[Statement] flatten = [];
-	int maxThreshold = 100;
-	
-	if (size(statements) > maxThreshold) {
-		return flatten;
-	}
+int countStatements(list[Statement] statements) {
+	int count = 0;
 	
 	for (statement <- statements) {
-		if (size(flatten) <= maxThreshold) {
-			visit (statement) {
-				case \block(statements)					: flatten += statement + flattenStatements(statements);
-				case \do(body, _)						: flatten += statement + flattenStatements([body]);
-				case \foreach(_, _, body)				: flatten += statement + flattenStatements([body]);
-				case \for(_, _, _, body)				: flatten += statement + flattenStatements([body]);
-				case \for(_, _, body)					: flatten += statement + flattenStatements([body]);
-				case \if(_, body)						: flatten += statement + flattenStatements([body]);
-				case \if(_, body1, body2)				: flatten += statement + flattenStatements([body1, body2]);
-				case \label(_, body)					: flatten += statement + flattenStatements([body]);
-				case \switch(_, statements)				: flatten += statement + flattenStatements(statements);
-				case \synchronizedStatement(_, body)	: flatten += statement + flattenStatements([body]);
-				case \try(body, catchClauses)			: flatten += statement + flattenStatements(catchClauses + body);
-				case \try(body, catchClauses, \finally)	: flatten += statement + flattenStatements(catchClauses + body + \finally);
-				case \catch(_, body)					: flatten += statement + flattenStatements([body]);
-				case \while(_, body)					: flatten += statement + flattenStatements([body]);
-				default									: flatten += statement; 
-			}
-		} else {
-			break;
+		visit (statement) {
+			case \block(statements)					: count += 1 + countStatements(statements);
+			case \do(body, _)						: count += 1 + countStatements([body]);
+			case \foreach(_, _, body)				: count += 1 + countStatements([body]);
+			case \for(_, _, _, body)				: count += 1 + countStatements([body]);
+			case \for(_, _, body)					: count += 1 + countStatements([body]);
+			case \if(_, body)						: count += 1 + countStatements([body]);
+			case \if(_, body1, body2)				: count += 1 + countStatements([body1, body2]);
+			case \label(_, body)					: count += 1 + countStatements([body]);
+			case \switch(_, statements)				: count += 1 + countStatements(statements);
+			case \synchronizedStatement(_, body)	: count += 1 + countStatements([body]);
+			case \try(body, catchClauses)			: count += 1 + countStatements(catchClauses + body);
+			case \try(body, catchClauses, \finally)	: count += 1 + countStatements(catchClauses + body + \finally);
+			case \catch(_, body)					: count += 1 + countStatements([body]);
+			case \while(_, body)					: count += 1 + countStatements([body]);
+			default									: count += 1; 
 		}
 	}
 	
-	return flatten;
+	return count;
 }
