@@ -9,38 +9,74 @@ import Map;
 import Set;
 import Node;
 
-void clones(set[Declaration] ast) {
-	set[tuple[loc, loc]] clones = {};
+void clones(set[Declaration] ast) {	
+	println("hashing blocks");
+	
+	map[int, list[tuple[Statement, Statement]]] hash = hashBlocks(ast);
+	
+	println("hashing done");
+	println("comparing keys:");
+	
+	set[tuple[loc, loc]] clones = clonesFromHash(hash);
+	
+	println("\ncomparing done\n");
+	
+	for(clone <- clones) {
+		println("clone = <clone>");
+	}
+	
+	println("\nsize hash:\t<size(hash)>");
+	println("size clones:\t<size(clones)>");
+}
+
+int countStatements(list[Statement] body) {
+	int count = 0;
+	
+	visit (body) {
+		case \block (_)		: count += 0;
+		case Statement _	: count += 1;
+	}
+	
+	return count;
+}
+
+map[int, list[tuple[Statement, Statement]]] hashBlocks(set[Declaration] ast) {
 	map[int, list[tuple[Statement, Statement]]] hash = ();
-	list[tuple[Statement, Statement]] bs = [<b, unsetRec(b)> | /b: \block(_) := ast];
 	
 	int minStmts = 3;
-	int maxStmts = 100;
-	int abc = 0;
+	int maxStmts = 100;	
 	
-	println("blocks gathered");
-	
-	for (b <- bs) {
-		abc += 1;
-		
-		if (abc % 100 == 0) {
-			println("<abc>/<size(bs)>");
-		}
-		
-		//println(b[0].src);
-		
-		int key = countStatements([b[0]]);
+	visit (ast) {
+		case b: \block(_)	: {
+			int key = countStatements([b]);
 			
-		if(key >= minStmts && key <= maxStmts) {
-			if (key in hash) {
-				hash[key] += b;
-			} else {
-				hash[key] = [b];
+			if (key >= minStmts && key <= maxStmts) {
+				if (key in hash) {
+					hash[key] += <b, unsetRec(b)>;
+				} else {
+					hash[key] = [<b, unsetRec(b)>];
+				}
 			}
 		}
 	}
 	
-	println("hash done");
+	return hash;
+}
+
+bool compareStatements(tuple[Statement, Statement] i, tuple[Statement, Statement] j) {
+	return i[1] == j[1] && i[0].src != j[0].src;
+}
+
+list[loc] subStatements(Statement blck) {
+	if (\block(stmts) := blck) {
+		return [b.src | /b: \block(_) := stmts];
+	} 
+	
+	return [];
+}
+
+set[tuple[loc, loc]] clonesFromHash(map[int, list[tuple[Statement, Statement]]] hash) {	
+	set[tuple[loc, loc]] clones = {};
 	
 	for (key <- sort(domain(hash))) {
 		if(size(hash[key]) > 1) {
@@ -59,35 +95,6 @@ void clones(set[Declaration] ast) {
 		}
 		println("key:\t<key>");
 	}
-	println("\ndone\n");
 	
-	for(clone <- clones) {
-		println("clone = <clone>");
-	}	
-	
-	println("size hash:\t<size(hash)>");
-	println("size clones:\t<size(clones)>");
-}
-
-bool compareStatements(tuple[Statement, Statement] i, tuple[Statement, Statement] j) {
-	return i[1] == j[1] && i[0].src != j[0].src;
-}
-
-list[loc] subStatements(Statement blck) {
-	if (\block(stmts) := blck) {
-		return [b.src | /b: \block(_) := stmts];
-	} 
-	
-	return [];
-}
-
-int countStatements(list[Statement] body) {
-	int count = 0;
-	
-	visit (body) {
-		case \block (_)		: count += 0;
-		case Statement _	: count += 1;
-	}
-	
-	return count;
+	return clones;
 }
