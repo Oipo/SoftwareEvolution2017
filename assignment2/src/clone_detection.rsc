@@ -4,6 +4,7 @@ import IO;
 import lang::java::m3::Core;
 import lang::java::jdt::m3::AST;
 import lang::java::jdt::m3::Core;
+import util::ValueUI;
 import List;
 import Map;
 import Set;
@@ -27,6 +28,8 @@ void clones(set[Declaration] ast) {
 	
 	println("\nsize hash:\t<size(hash)>");
 	println("size clones:\t<size(clones)>");
+	
+	text(clones);
 }
 
 int countStatements(list[Statement] body) {
