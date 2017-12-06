@@ -15,9 +15,20 @@ void clones(set[Declaration] ast) {
 	list[tuple[Statement, Statement]] bs = [<b, unsetRec(b)> | /b: \block(_) := ast];
 	
 	int minStmts = 3;
-	int maxStmts = 400;
+	int maxStmts = 100;
+	int abc = 0;
+	
+	println("blocks gathered");
 	
 	for (b <- bs) {
+		abc += 1;
+		
+		if (abc % 100 == 0) {
+			println("<abc>/<size(bs)>");
+		}
+		
+		//println(b[0].src);
+		
 		int key = countStatements([b[0]]);
 			
 		if(key >= minStmts && key <= maxStmts) {
@@ -27,7 +38,9 @@ void clones(set[Declaration] ast) {
 				hash[key] = [b];
 			}
 		}
-	}	
+	}
+	
+	println("hash done");
 	
 	for (key <- sort(domain(hash))) {
 		if(size(hash[key]) > 1) {
@@ -47,11 +60,13 @@ void clones(set[Declaration] ast) {
 		println("key:\t<key>");
 	}
 	println("\ndone\n");
-	println("size hash:\t<size(hash)>");
-	println("size clones:\t<size(clones)>");
+	
 	for(clone <- clones) {
 		println("clone = <clone>");
-	}
+	}	
+	
+	println("size hash:\t<size(hash)>");
+	println("size clones:\t<size(clones)>");
 }
 
 bool compareStatements(tuple[Statement, Statement] i, tuple[Statement, Statement] j) {
@@ -66,53 +81,12 @@ list[loc] subStatements(Statement blck) {
 	return [];
 }
 
-int countStatements(list[Statement] statements) {
+int countStatements(list[Statement] body) {
 	int count = 0;
 	
-	for (statement <- statements) {
-		visit (statement) {
-			case \block(statements)					: count += 1 + countStatements(statements);
-			case \do(body, _)						: count += 1 + countStatements([body]);
-			case \foreach(_, _, body)				: count += 1 + countStatements([body]);
-			case \for(_, _, _, body)				: count += 1 + countStatements([body]);
-			case \for(_, _, body)					: count += 1 + countStatements([body]);
-			case \if(_, body)						: count += 1 + countStatements([body]);
-			case \if(_, body1, body2)				: count += 1 + countStatements([body1, body2]);
-			case \label(_, body)					: count += 1 + countStatements([body]);
-			case \switch(_, statements)				: count += 1 + countStatements(statements);
-			case \synchronizedStatement(_, body)	: count += 1 + countStatements([body]);
-			case \try(body, catchClauses)			: count += 1 + countStatements(catchClauses + body);
-			case \try(body, catchClauses, \finally)	: count += 1 + countStatements(catchClauses + body + \finally);
-			case \catch(_, body)					: count += 1 + countStatements([body]);
-			case \while(_, body)					: count += 1 + countStatements([body]);
-			
-			case \assert(_)							: count += 1;
-			case \assert(_, _)						: count += 1;
-			case \break()							: count += 1;
-			case \break(_)							: count += 1;
-			case \continue()						: count += 1;
-			case \continue(_)						: count += 1;
-			case \empty()							: count += 1;
-			case \return(_)							: count += 1;
-			case \return()							: count += 1;
-			case \case(_)							: count += 1;
-			case \defaultCase()						: count += 1;
-			case \throw(_)							: count += 1;
-			case \expressionStatement(_)			: count += 1;
-			case \constructorCall(_, _, _)			: count += 1;
-			case \constructorCall(_, _)				: count += 1;
-			
-			
-			case \declarationStatement(decl)	: {
-				count += 1;
-				
-				visit (decl) {
-					case \initializer(initializerBody)	: count += countStatements([initializerBody]);
-					case \method(_, _, _, _, impl)	: count += countStatements([impl]);
-					case \constructor(_, _, _, impl)	: count += countStatements([impl]);
-				}
-			}
-		}
+	visit (body) {
+		case \block (_)		: count += 0;
+		case Statement _	: count += 1;
 	}
 	
 	return count;
