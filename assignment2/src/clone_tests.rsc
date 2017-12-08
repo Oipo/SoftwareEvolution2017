@@ -32,3 +32,11 @@ test bool type2_simple() {
 	int clonedLines = get_volume(toList({l | <l, _> <- cs}));
 	return size(cs) == 2 && clonedLines == 10;
 }
+
+test bool type2_complex() {
+	f = createAstFromFile(|project://assignment2/test/type2_complex.java|, true);
+	cs = clones({f}, 2);
+	int clonedLines = get_volume(toList({l | <l, _> <- cs}));
+	println(<size(cs), clonedLines>);
+	return size(cs) == 2 && clonedLines == 30;
+}
