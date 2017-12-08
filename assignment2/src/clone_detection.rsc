@@ -5,31 +5,62 @@ import lang::java::m3::Core;
 import lang::java::jdt::m3::AST;
 import lang::java::jdt::m3::Core;
 import util::ValueUI;
+import util::Math;
 import List;
 import Map;
 import Set;
 import Node;
+import volume;
+import code_filtering;
+import Type;
 
-void clones(set[Declaration] ast) {	
-	println("hashing blocks");
+void getMetrics(set[Declaration] ast, M3 m) {
+	int totalLines = get_volume(toList(files(m)));
+	
+	for (i <- [1..3]) {
+		set[tuple[loc, loc]] clones = clones(ast, i);
+		int clonedLines = get_volume(toList({l | <l, _> <- clones}));
+		
+		println("Code clone type-<i>:");
+		println("Number of clones:\t\t<size(clones)>");
+		println("Number of cloned lines:\t\t<clonedLines>");
+		println("Percentage of cloned lines:\t<100.0 * clonedLines / totalLines>%");
+		println();
+	}
+}
+
+int clonesVolume(set[Declaration] ast, int cloneType) {
+	set[tuple[loc, loc]] clones = clones(ast, cloneType);
+	
+	return get_volume(toList({l | <l, _> <- clones}));
+}
+
+set[tuple[loc, loc]]  clones(set[Declaration] ast, int cloneType) {	
+	//println("hashing blocks");
+	
+	if (cloneType == 2) {
+		ast = toTypeTwoCloneAst(ast);
+	}
 	
 	map[int, list[tuple[Statement, Statement]]] hash = hashBlocks(ast);
 	
-	println("hashing done");
-	println("comparing keys:");
+	//println("hashing done");
+	//println("comparing keys:\n");
 	
 	set[tuple[loc, loc]] clones = clonesFromHash(hash);
 	
-	println("\ncomparing done\n");
+	//println("\ncomparing done\n");
 	
-	for(clone <- clones) {
-		println("clone = <clone>");
-	}
+	//for(clone <- clones) {
+	//	println("clone = <clone>");
+	//}
 	
-	println("\nsize hash:\t<size(hash)>");
-	println("size clones:\t<size(clones)>");
+	//println("\nsize hash:\t<size(hash)>");
+	//println("size clones:\t<size(clones)>");
 	
-	text(clones);
+	//text(clones);
+	
+	return clones;
 }
 
 int countStatements(list[Statement] body) {
@@ -96,8 +127,46 @@ set[tuple[loc, loc]] clonesFromHash(map[int, list[tuple[Statement, Statement]]] 
 				}
 			}
 		}
-		println("key:\t<key>");
+		//println("key:\t<key>");
 	}
 	
 	return clones;
+}
+
+set[Declaration] toTypeTwoCloneAst(set[Declaration] ast) {
+	return visit (ast) {
+		//case \newArray(_, d, i)			=> \newArray(\boolean(), d, i)
+    	//case \newArray(_, d)				=> \newArray(Boolean, d)
+    	//case \newObject(e, _, a, c)		=> \newObject(e, Boolean, a, c)
+    	//case \newObject(e, _,a)			=> \newObject(e, Boolean, a)
+    	//case \fieldAccess(i, e, _)		=> \fieldAccess(i, e, "")
+    	case \methodCall(i, _, a)		=> \methodCall(i, "", a)
+    	case \methodCall(i, r, _, a)	=> \methodCall(i, r, "", a)
+		case \number(_)					=> \booleanLiteral(true)
+		case \booleanLiteral(_)			=> \booleanLiteral(true)
+		case \stringLiteral(_)			=> \booleanLiteral(true)
+		//case \type(_)					=> \type(typeOf(true))
+		case \variable(_, d)			=> \variable("", d)
+		case \variable(_, d, i)			=> \variable("", d, i)
+		//case \prefix(_, _)				=> none
+		case \simpleName(_)				=> \simpleName("")
+		
+		//case \arrayType(_)				=> \boolean()
+		//case \parameterizedType(_)		=> \boolean()
+		//case \qualifiedType(_, _)		=> \boolean()
+		//case \simpleType(_)				=> \boolean()
+		//case \unionType(_)				=> \boolean()
+		case \wildcard()				=> \boolean()
+		//case \upperbound(_)				=> \boolean()
+		//case \lowerbound(_)				=> \boolean()
+		case \int() 					=> \boolean()
+		case \short()					=> \boolean()
+		case \long()					=> \boolean()
+		case \float()					=> \boolean()
+		case \double()					=> \boolean()
+		case \char()					=> \boolean()
+		case \string()					=> \boolean()
+		case \byte()					=> \boolean()
+		case \void()					=> \boolean()
+	};
 }
