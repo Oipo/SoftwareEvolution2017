@@ -70,7 +70,7 @@ export class AppComponent {
 
         var tempD3 = this.d3;
 
-        d32.json("flare.json", function(error, classes) {
+        d32.json("clones.json", function(error, classes) {
       if (error) throw error;
 
       var root = packageHierarchy(classes, tempD3)
@@ -131,7 +131,7 @@ export class AppComponent {
         if (!node) {
           node = map[name] = data || {name: name, children: []};
           if (name.length) {
-            node.parent = find(name.substring(0, i = name.lastIndexOf(".")), null);
+            node.parent = find(name.substring(0, i = name.lastIndexOf("/")), null);
             node.parent.children.push(node);
             node.key = name.substring(i + 1);
           }
@@ -166,5 +166,5 @@ export class AppComponent {
       return imports;
     }
   }
-  
+
 }

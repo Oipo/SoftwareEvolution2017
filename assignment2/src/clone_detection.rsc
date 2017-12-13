@@ -94,6 +94,12 @@ set[tuple[loc, loc]]  clones(set[Declaration] ast, int cloneType) {
 	
 	//text(clones);
 	
+	writeFile(|project://assignment2/clones.txt|, "");
+	
+	for (clone <- clones) {
+		appendToFile(|project://assignment2/clones.txt|, "<clone>\n");
+	}
+	
 	return clones;
 }
 

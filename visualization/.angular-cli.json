@@ -10,7 +10,7 @@
       "assets": [
         "assets",
         "favicon.ico",
-        "flare.json"
+        "clones.json"
       ],
       "index": "index.html",
       "main": "main.ts",
