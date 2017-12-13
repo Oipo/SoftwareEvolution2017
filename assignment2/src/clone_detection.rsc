@@ -97,6 +97,36 @@ map[int, list[tuple[Statement, Statement]]] hashBlocks(set[Declaration] ast) {
 	return hash;
 }
 
+real compareTree(tuple[Statement, Statement] i, tuple[Statement, Statement] j) {
+	list[Statement] subTree1 = subStatements2(i[1]);
+	list[Statement] subTree2 = subStatements2(j[1]);
+	int numberOfSharedNodes = 0;
+	
+	for (x <- subTree1) {
+		for (y <- subTree2) {
+			if (x == y) {
+				numberOfSharedNodes += 1;
+			}
+		}
+	}
+	
+	int divisor = 2 * numberOfSharedNodes + size(subTree1 - subTree2) + size(subTree2 - subTree1);
+	
+	if (divisor == 0) {
+		return 0.0;
+	} else {
+		return (2.0 * numberOfSharedNodes) / divisor;
+	}
+}
+
+list[Statement] subStatements2(Statement blck) {
+	if (\block(stmts) := blck) {
+		return [b | /b: \block(_) := stmts] + blck;
+	} 
+	
+	return [blck];
+}
+
 bool compareStatements(tuple[Statement, Statement] i, tuple[Statement, Statement] j) {
 	return i[1] == j[1] && i[0].src != j[0].src;
 }
@@ -119,7 +149,7 @@ set[tuple[loc, loc]] clonesFromHash(map[int, list[tuple[Statement, Statement]]] 
 					if (compareStatements(i, j)) {
 						for (subStatement <- subStatements(i[0])) {
 							//println(<i[0].src, subStatement>);
-							clones = {x | x <- clones, x[0] != subStatement && x[1] != subStatement};
+							clones = {clone | clone <- clones, clone[0] != subStatement && clone[1] != subStatement};
 						}
 						
 						clones += <i[0].src, j[0].src>;
