@@ -14,6 +14,7 @@ import volume;
 import code_filtering;
 import Type;
 
+// print metrics for types 1 and 2 clones
 void getMetrics(set[Declaration] ast, M3 m) {
 	int totalLines = get_volume(toList(files(m)));
 	
@@ -29,12 +30,45 @@ void getMetrics(set[Declaration] ast, M3 m) {
 	}
 }
 
+// sum lines of code of all clones
 int clonesVolume(set[Declaration] ast, int cloneType) {
 	set[tuple[loc, loc]] clones = clones(ast, cloneType);
 	
 	return get_volume(toList({l | <l, _> <- clones}));
 }
 
+// Group all found clones into a map so that we can count how often
+// they appear and print the clone only once
+void printFirstCodeClones(set[tuple[loc, loc]] clones) {
+	map[loc, set[loc]] files = ();
+	for(key <- clones) {
+		if(key[0] in files) {
+			// new file
+			files[key[0]] += key[1];
+		} else {
+			bool found = false;
+			// for all <loc1, loc2> we also have <loc2, loc1>
+			// so filter those
+			for(file <- files) {
+				if(key[1] in files[file]) {
+					found = true;
+					break;
+				}
+			}
+			if(!found) {
+				files[key[0]] = {key[1]};
+			}
+		}
+	}
+	
+	for(file <- files) {
+		code = readFile(file);
+		println(<file, size(files[file]), code>);
+		println();
+	}
+}
+
+// find clones of given type for given ast
 set[tuple[loc, loc]]  clones(set[Declaration] ast, int cloneType) {	
 	//println("hashing blocks");
 	
@@ -63,6 +97,7 @@ set[tuple[loc, loc]]  clones(set[Declaration] ast, int cloneType) {
 	return clones;
 }
 
+// count number of statements recursively for a given list of statements
 int countStatements(list[Statement] body) {
 	int count = 0;
 	
@@ -74,6 +109,8 @@ int countStatements(list[Statement] body) {
 	return count;
 }
 
+// create a hashmap of statements with and without src lines
+// this due to a bug in rascal where comparing two separate statements with their src lines always returns false
 map[int, list[tuple[Statement, Statement]]] hashBlocks(set[Declaration] ast) {
 	map[int, list[tuple[Statement, Statement]]] hash = ();
 	
@@ -127,10 +164,12 @@ list[Statement] subStatements2(Statement blck) {
 	return [blck];
 }
 
+// compare statements without src lines and make sure that we're not comparing the exact same lines to each other
 bool compareStatements(tuple[Statement, Statement] i, tuple[Statement, Statement] j) {
 	return i[1] == j[1] && i[0].src != j[0].src;
 }
 
+// get all subblocks of given block
 list[loc] subStatements(Statement blck) {
 	if (\block(stmts) := blck) {
 		return [b.src | /b: \block(_) := stmts];
@@ -139,6 +178,7 @@ list[loc] subStatements(Statement blck) {
 	return [];
 }
 
+// compare all clones within each buckets and subsume them if subtrees already found
 set[tuple[loc, loc]] clonesFromHash(map[int, list[tuple[Statement, Statement]]] hash) {	
 	set[tuple[loc, loc]] clones = {};
 	
@@ -163,6 +203,7 @@ set[tuple[loc, loc]] clonesFromHash(map[int, list[tuple[Statement, Statement]]] 
 	return clones;
 }
 
+// rename all names, literals, numbers etc to the same thing, so that we can find type-2 clones
 set[Declaration] toTypeTwoCloneAst(set[Declaration] ast) {
 	return visit (ast) {
 		//case \newArray(_, d, i)			=> \newArray(\boolean(), d, i)
