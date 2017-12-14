@@ -119,7 +119,7 @@ set[tuple[loc, loc]]  clones(set[Declaration] ast, int cloneType) {
 	writeFile(|project://assignment2/clones.txt|, "");
 	
 	for (clone <- clones) {
-		appendToFile(|project://assignment2/clones.txt|, "<clone>\n");
+		appendToFile(|project://assignment2/clones.txt|, "<clone> |<get_volume([clone[0]])>| |<get_volume([clone[1]])>|\n");
 	}
 	
 	return clones;

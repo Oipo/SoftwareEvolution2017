@@ -60,7 +60,7 @@ export class TreemapComponent implements OnInit, OnDestroy {
         .round(true)
         .paddingInner(1);
 
-    d32.json("treemap_clones.json", function(error, data) {
+    d32.json("clonesTreemap.json", function(error, data) {
       if (error) throw error;
 
       var root = tempD3.hierarchy(data)

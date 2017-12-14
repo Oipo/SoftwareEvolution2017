@@ -69,7 +69,7 @@ export class BundlingComponent implements OnInit, OnDestroy {
 
         var tempD3 = this.d3;
 
-        d32.json("clones.json", function(error, classes) {
+        d32.json("clonesWheel.json", function(error, classes) {
       if (error) throw error;
 
       var root = packageHierarchy(classes, tempD3)
