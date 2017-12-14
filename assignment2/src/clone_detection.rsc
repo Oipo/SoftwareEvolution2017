@@ -21,12 +21,38 @@ void getMetrics(set[Declaration] ast, M3 m) {
 	for (i <- [1..3]) {
 		set[tuple[loc, loc]] clones = clones(ast, i);
 		int clonedLines = get_volume(toList({l | <l, _> <- clones}));
+		map[loc, set[loc]] groupedClones = groupCodeClones(clones);
+		
+		tuple[int, loc] biggestCloneClass = <0, |file:///|>;
+		for(clone <- groupedClones) {
+			int volume = get_volume([clone]);
+			if(volume > biggestCloneClass[0]) {
+				biggestCloneClass[0] = volume;
+				biggestCloneClass[1] = clone;
+			}
+		}
 		
 		println("Code clone type-<i>:");
 		println("Number of clones:\t\t<size(clones)>");
+		println("Number of clone classes:\t<size(groupedClones)>");
+		println("Biggest clone class:\t\t<biggestCloneClass>");
 		println("Number of cloned lines:\t\t<clonedLines>");
 		println("Percentage of cloned lines:\t<100.0 * clonedLines / totalLines>%");
 		println();
+		println("First two clone classes:");
+		
+		int showNumber = 2;
+		for(clone <- groupedClones) {
+			code = readFile(clone);
+			println(<clone, size(groupedClones[clone]), code>);
+			println();
+			
+			showNumber -= 1;
+			
+			if(showNumber <= 0) {
+				break;
+			}
+		}
 	}
 }
 
@@ -39,7 +65,7 @@ int clonesVolume(set[Declaration] ast, int cloneType) {
 
 // Group all found clones into a map so that we can count how often
 // they appear and print the clone only once
-void printFirstCodeClones(set[tuple[loc, loc]] clones) {
+map[loc, set[loc]] groupCodeClones(set[tuple[loc, loc]] clones) {
 	map[loc, set[loc]] files = ();
 	for(key <- clones) {
 		if(key[0] in files) {
@@ -61,11 +87,7 @@ void printFirstCodeClones(set[tuple[loc, loc]] clones) {
 		}
 	}
 	
-	for(file <- files) {
-		code = readFile(file);
-		println(<file, size(files[file]), code>);
-		println();
-	}
+	return files;
 }
 
 // find clones of given type for given ast
