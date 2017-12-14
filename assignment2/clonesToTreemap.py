@@ -1,8 +1,6 @@
 import sys
 import json
 
-from pprint import pprint
-
 output = []
 temp = {}
 f = open(sys.argv[1], 'r')
