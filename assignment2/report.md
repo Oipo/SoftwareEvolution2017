@@ -9,6 +9,11 @@ a = createAstsFromEclipseProject(|project:///example|, true);
 text(clones(a));
 ```
 
+Convert rascal output to json
+```
+python2.7 clones_to_json.py clones.txt ../visualization/src/clones.json
+```
+
 Save the resulting text file and run it through test.py
 Use the resulting json file and put it in flare.json
 Install nodejs 8 or higher
