@@ -27,9 +27,9 @@ public class TestTokenizer {
             databaseMap = fileDatabaseMap;
             key         = filePathToKey(path);
         } else if (type == DatabaseURL.S_RES) {
-            databaseMap = resDatabaseMap;
-        } else if (type == DatabaseURL.S_MEM) {
             databaseMap = memDatabaseMap;
+        } else if (type == DatabaseURL.S_MEM) {
+            databaseMap = resDatabaseMap;
         } else {
             throw (Error.runtimeError(ErrorCode.U_S0500, 1));
         }

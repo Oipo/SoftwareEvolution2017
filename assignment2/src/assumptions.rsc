@@ -36,10 +36,3 @@ test bool value_can_contain_multiple_types() {
 	c = b;
 	return c == b;
 }
-
-test bool traverse_declaration() {
-	Declaration a = \initializer(\empty());
-	for(b <- a) {
-		println(a);
-	}
-}
