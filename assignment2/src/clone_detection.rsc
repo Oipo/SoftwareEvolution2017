@@ -77,7 +77,7 @@ map[loc, set[loc]] groupCodeClones(set[tuple[loc, loc]] clones) {
 			// for all <loc1, loc2> we also have <loc2, loc1>
 			// so filter those
 			for(file <- files) {
-				if(key[1] in files[file]) {
+				if(key[0] in files[file] || key[1] in files[file]) {
 					found = true;
 					break;
 				}
