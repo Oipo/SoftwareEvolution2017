@@ -1,10 +1,18 @@
 Best viewable in https://dillinger.io/
 
-# *Method*
+# Method
+The algorithm used for clone detection is based on the paper Clone Detection Using Abstract Syntax Trees[1]. We chose this algorithm because it is easy to work with abstract syntrax trees in RASCAL. Additionally, we focussed on type-1 and type-2 clones which are easy to find using abstract syntax trees, especially in RASCAL if you remove source locations using ```unsetRec```.
+
+The algorithm works by comparing subtrees. This is done by first hashing subtrees to a bucket. In our implentation we use ```block``` statements instead because these contain lists of statements which essentially are a subtree. The number of statements for each block is first counted so that blocks with the same number of statements are hashed in the same bucket. This saves performance later on when blocks are compared, because for type-1 and type-2 clones the number of statements has to be exactly the same. This also allows us to easily set a minimum and maximum for the number of statements which means we can easily adjust the size of the clones we want to detect.
+
+After the hashing has been completed, we go over each pair within the same bucket and check if they are the same by simply comparing for exact equality. The algorithm in the paper uses a formula the calculate the similarity between two subtrees. A function to calculate this similarity has been implemented but it only added 12 new clones with a threshold as low as 0.5 and these clones were of type-3. It is expected that this formula would add type-3 clones because it uses the number of shared and different nodes to calculate the similarity. Since the focus of our clone detection was to detect type-1 and type-2 clones, we have opted to just check for exact equality.
+
+Once a clone pair is found by comparing for exact equality, a list of all the blocks in one of the found clones is created. If one of these blocks is in the set of clone pairs that have been gathered so far, it is then removed so that only the largest form of the clone ends up in the set of clone pairs. Once it is done checking for subblocks the new clone pair is added to the set of clones.
+
 ```
 for each block b in ast:
         bucket = countStatements(b)
-        addBlock(hash, key, b)
+        addBlock(hash, bucket, b)
 
 for each block i and j in the same bucket:
         if compareBlocks(i, j):
@@ -13,6 +21,17 @@ for each block i and j in the same bucket:
                                 removeClonePair(clones, s)
 
                 addClonePair(clones, i, j)
+```
+
+In order to detect type-2 clones an additional step needs to be taken. This step changes the abstract syntax tree such that identifiers, literals and types are ignored when checking for equality. This is done by replacing the value of these to the same value. Each of the identifiers has their value changed to an empty string, each literal is changed to the boolean literal for true and each type is changed to that of boolean. So now when the subtrees are compared for exact equality these values are the same and thus will go through the equality check.
+
+```
+// type replacer
+visit (ast):
+    case \int()     => \boolean()
+    case \short()   => \boolean()
+    ...
+    case \void()    => \boolean()
 ```
 
 # *Visualization*
@@ -34,7 +53,7 @@ E14: visualization is static and therefore the maintainer is not burdened by any
 
 ## Hierachical Tree Bundling (HTB)
 
-The HTB provides a high level view of which files contain clones from other files or if the file contains code clones but contained just within the same file. When a file contains code clones but has all are contained within the same file, it is shown as a filename with no links to any other. Files that do have links to other files might contain clones of itself within itself, but to reduce the clutter of the visualization, we opted to not show links to the same file, effectively obscuring these types of clones in this particular visualization. However, the Treemap visualization does show these types. 
+The HTB provides a high level view of which files contain clones from other files or if the file contains code clones but contained just within the same file. When a file contains code clones but has all are contained within the same file, it is shown as a filename with no links to any other. Files that do have links to other files might contain clones of itself within itself, but to reduce the clutter of the visualization, we opted to not show links to the same file, effectively obscuring these types of clones in this particular visualization. However, the Treemap visualization does show these types.
 
 ### Main requirements satisfying maintainer
 
@@ -188,7 +207,7 @@ bool: true
 # *time taken*
 
 - Michael: 40 hours
-- Constantijn: 60 hours
+- Constantijn: 40 hours
 
 # *References*
 
