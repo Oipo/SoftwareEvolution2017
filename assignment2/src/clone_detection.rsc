@@ -13,6 +13,7 @@ import Node;
 import volume;
 import code_filtering;
 import Type;
+import String;
 
 // print metrics for types 1 and 2 clones
 void getMetrics(set[Declaration] ast, M3 m) {
@@ -88,6 +89,34 @@ map[loc, set[loc]] groupCodeClones(set[tuple[loc, loc]] clones) {
 	}
 	
 	return files;
+}
+
+void outputClones(set[tuple[loc, loc]] clones) {
+	map[loc, set[loc]] groupedClones = groupCodeClones(clones);
+	loc fn = |project://visualizaton/src/codeClones.html|;
+	loc out = |project://assignment2/clones.txt|;
+	int i = 0;
+	
+	writeFile(out, "");
+	writeFile(fn, "\<html\>\<body\>\n\n");
+	
+	for (key <- groupedClones) {
+		appendToFile(fn, "\<a name=\"codeclone<i>\"\>\</a\>\n");
+		appendToFile(fn, "\<code\>\n");
+		appendToFile(fn, replaceAll(readFile(key), "\n", "\<br/\>"));
+		appendToFile(fn, "\n\</code\>\<br/\>\<br/\>\n\n");
+		
+		appendToFile(out, "<i><key>|<get_volume([key])>|\n");
+		
+		for (clone <- groupedClones[key]) {
+			appendToFile(out, "<i><clone>|<get_volume([clone])>|\n");
+			//println(clone);
+		}
+		
+		i += 1;
+	}
+	
+	appendToFile(fn, "\</body\>\</html\>");
 }
 
 // find clones of given type for given ast

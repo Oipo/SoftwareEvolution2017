@@ -1,11 +1,27 @@
 Best viewable in https://dillinger.io/
+
+# Method
+```
+for each block b in ast:
+        bucket = countStatements(b)
+        addBlock(hash, key, b)
+
+for each block i and j in the same bucket:
+        if compareBlocks(i, j):
+                for each subBlock s in i:
+                        if s in clones:
+                                removeClonePair(clones, s)
+
+        addClonePair(clones, i, j)
+```
+
 # how to use
 
 ## Prerequisites
 
-Nodejs 8 or higher
-Python version 2
-Eclipse + Rascal plugin
+- Nodejs 8 or higher
+- Python version 2 or 3
+- Eclipse + Rascal plugin
 
 ## Show me the visualization results
 
@@ -27,16 +43,10 @@ a = createAstsFromEclipseProject(|project:///example|, true);
 clones(a);
 ```
 
-Open a command window
+Open a command window to convert rascal output to json
 ```
-python2.7 clonesToWheel.py clones.txt ../visualization/src/clonesWheel.json
-```
-
-Copy the resulting clones.json to visualization/src.
-
-Convert rascal output to json
-```
-python2.7 clonesToWheel.py clones.txt ../visualization/src/clonesWheel.json
+python clonesToWheel.py clones.txt ../visualization/src/clonesWheel.json
+python clonesToTreemap.py clones.txt ../visualization/src/clonesTreemap.json
 ```
 
 Save the resulting text file and run it through test.py
@@ -156,5 +166,5 @@ URL: http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=738528&isnumber=159
 Chanchal K. Roy, James R. Cordy, Rainer Koschke, Comparison and evaluation of code clone detection techniques and tools: A qualitative approach, In Science of Computer Programming, Volume 74, Issue 7, 2009, Pages 470-495, ISSN 0167-6423, DOI: https://doi.org/10.1016/j.scico.2009.02.007.
 URL: http://www.sciencedirect.com/science/article/pii/S0167642309000367
 
-Lingxiao Jiang, Ghassan Misherghi, Zhendong Su, and Stephane Glondu. 2007. DECKARD: Scalable and Accurate Tree-Based Detection of Code Clones. In Proceedings of the 29th international conference on Software Engineering (ICSE '07). IEEE Computer Society, Washington, DC, USA, 96-105. DOI=http://dx.doi.org/10.1109/ICSE.2007.30 
+Lingxiao Jiang, Ghassan Misherghi, Zhendong Su, and Stephane Glondu. 2007. DECKARD: Scalable and Accurate Tree-Based Detection of Code Clones. In Proceedings of the 29th international conference on Software Engineering (ICSE '07). IEEE Computer Society, Washington, DC, USA, 96-105. DOI=http://dx.doi.org/10.1109/ICSE.2007.30
 URL: https://dl.acm.org/citation.cfm?id=1248843
