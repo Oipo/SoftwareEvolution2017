@@ -1,28 +1,2189 @@
 <html>
+    <head>
+            <link href="prism.css" rel="stylesheet" />
+    </head>
     <body>
-        <a name="clone1"></a>
-        <code>bestand1.java
-            bestand2.java
-            source code</code><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <a name="clone2"></a>
-        <code>bestand1.java
-            bestand2.java
-            source code</code><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <a name="clone3"></a>
-        <code>bestand1.java
-            bestand2.java
-            source code</code><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <a name="clone4"></a>
-        <code>bestand1.java
-            bestand2.java
-            source code</code><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <a name="clone5"></a>
-        <code>bestand1.java
-            bestand2.java
-            source code</code><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <a name="clone6"></a>
-        <code>bestand1.java
-            bestand2.java
-            source code</code><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    </body>
-</html>
+            <script src="prism.js"></script>
+
+        <a name="codeclone0"></a>
+        <pre><code class="language-java">
+        {
+                Money money = new Money();
+                money.value = value;
+                return money;
+            }
+        </code></pre><br/><br/><br/>
+        
+        <a name="codeclone1"></a>
+        <code>
+        {
+                if(param1.isNull()) return 0;
+                DateTime.Details details = new DateTime.Details(param1.getLong());
+                return details.dayofyear+1;
+            }
+        </code><br/><br/><br/>
+        
+        <a name="codeclone2"></a>
+        <code>
+        {
+                        // reset for the next test
+                        Statement st = con.createStatement();
+                        st.execute("DELETE FROM " + tableName);
+                        st.close();
+                    }
+        </code><br/><br/><br/>
+        
+        <a name="codeclone3"></a>
+        <code>
+        {
+                if(!isInit) return;
+                super.printStackTrace(ps);
+            }
+        </code><br/><br/><br/>
+        
+        <a name="codeclone4"></a>
+        <code>
+        {
+                Money money = new Money();
+                money.value = value;
+                return money;
+            }
+        </code>
+        
+        <a name="codeclone5"></a>
+        <code>
+        {
+                    // trim for CHAR and BINARY
+                    if(obj2 instanceof String) obj2 = ((String)obj2).trim();
+                    if(obj2 instanceof byte[]){
+                        byte[] tmp = (byte[])obj2;
+                        int k=tmp.length-1;
+                        for(; k>= 0; k--) if(tmp[k] != 0) break;
+                        k++;
+                        byte[] tmp2 = new byte[k];
+                        System.arraycopy( tmp, 0, tmp2, 0, k);
+                        obj2 = tmp2;
+                    }
+                }
+        </code>
+        
+        <a name="codeclone6"></a>
+        <code>
+        {
+                if(isNull()) return 0;
+                return Math.cos( param1.getDouble() );
+            }
+        </code>
+        
+        <a name="codeclone7"></a>
+        <code>
+        {
+                if(isNull()) return 0;
+                return Math.toDegrees( param1.getDouble() );
+            }
+        </code>
+        
+        <a name="codeclone8"></a>
+        <code>
+        {
+                try{
+                    Expression expr = getValue(i);
+                    wasNull = expr.isNull();
+                    return expr.getInt();
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone9"></a>
+        <code>
+        {
+                if(isNull()) return null;
+                return new MutableNumeric(getLong());
+            }
+        </code>
+        
+        <a name="codeclone10"></a>
+        <code>
+        {
+                try {
+                    Statement st = con.createStatement();
+                    st.execute("drop view "+name);
+                    st.close();
+                } catch (SQLException e) {/* ignore it, if the view not exist */}
+            }
+        </code>
+        
+        <a name="codeclone11"></a>
+        <code>
+        {
+                        result[i] = EXECUTE_FAILED;
+                        if(failed == null){
+                            failed = new BatchUpdateException(ex.getMessage(), ex.getSQLState(), ex.getErrorCode(), result);
+                            failed.initCause(ex);
+                        }
+                        failed.setNextException(ex);
+                    }
+        </code>
+        
+        <a name="codeclone12"></a>
+        <code>
+        {
+                if(isNull()) return null;
+                return Utils.getInteger(getInt());
+            }
+        </code>
+        
+        <a name="codeclone13"></a>
+        <code>
+        {
+                        DateTime.Details details2 = new DateTime.Details(param2.getLong());
+                        details2.month += param1.getLong();
+                        return DateTime.calcMillis(details2);
+                    }
+        </code>
+        
+        <a name="codeclone14"></a>
+        <code>
+        {
+                try {
+                    dropTable( AllTests.getConnection(), table );
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        </code>
+        
+        <a name="codeclone15"></a>
+        <code>
+        {
+                try{
+                    String obj = getValue(i).getString();
+                    wasNull = obj == null;
+                    return obj;
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone16"></a>
+        <code>
+        {
+                StringBuffer buf = new StringBuffer(bytes.length << 1);
+                for(int i=0; i<bytes.length; i++){
+                    buf.append( digits[ (bytes[i] >> 4) & 0x0F ] );
+                    buf.append( digits[ (bytes[i]     ) & 0x0F ] );
+                }
+                return buf.toString();
+            }
+        </code>
+        
+        <a name="codeclone17"></a>
+        <code>
+        {
+                try{
+                    MutableNumeric obj = getValue(i).getNumeric();
+                    wasNull = obj == null;
+                    if(wasNull) return null;
+                    return obj.toBigDecimal(scale);
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone18"></a>
+        <code>
+        {
+                        failed = true;
+                        msgBuf.append("\nAdditional entries for language ").append( OTHER_LANGUAGES[i] ).append(": ");
+                        
+                        for (Iterator itr = diff.iterator(); itr.hasNext(); ) {
+                            msgBuf.append(itr.next());
+                            if (itr.hasNext()) msgBuf.append(',');
+                        }
+                    }
+        </code>
+        
+        <a name="codeclone19"></a>
+        <code>
+        {
+                Connection con = AllTests.getConnection();
+                Statement st = con.createStatement();
+                st.execute("create table "+table+" (a varchar(2) unique)");
+                st.execute("alter table "+table+" add b varchar(4) primary key");
+                ResultSet rs = st.executeQuery("Select * From " + table);
+                assertRSMetaData( rs, new String[]{"a", "b"},  new int[]{Types.VARCHAR, Types.VARCHAR} );
+                rs = con.getMetaData().getIndexInfo( null, null, table, false, false );
+                assertRowCount( 2, rs );
+            }
+        </code>
+        
+        <a name="codeclone20"></a>
+        <code>
+        {
+                            MutableNumeric num = left.getNumeric();
+                            num.mul( right.getNumeric() );
+                            return num;
+                        }
+        </code>
+        
+        <a name="codeclone21"></a>
+        <code>
+        {
+                if(isNull()) return 0;
+                return Money.parseMoney(getString().trim());
+            }
+        </code>
+        
+        <a name="codeclone22"></a>
+        <code>
+        {
+                if(isNull()) return 0;
+                return Float.parseFloat(getString().trim());
+            }
+        </code>
+        
+        <a name="codeclone23"></a>
+        <code>
+        {
+                    for(int i=0; i>places; i--){
+                        factor *= 10;
+                    }
+                    value /= factor;
+                }
+        </code>
+        
+        <a name="codeclone24"></a>
+        <code>
+        {
+                if(param1.getBoolean())
+                    return param2.getFloat();
+                return param3.getFloat();
+            }
+        </code>
+        
+        <a name="codeclone25"></a>
+        <code>
+        {
+                ByteBuffer buffer = ByteBuffer.allocate(8);
+                buffer.putInt(MAGIC_TABLE);
+                buffer.putInt(TABLE_VIEW_VERSION);
+                buffer.position(0);
+                raFile.write(buffer);
+            }
+        </code>
+        
+        <a name="codeclone26"></a>
+        <code>
+        {
+                if(isNull()) return null;
+                return getObject().toString();
+            }
+        </code>
+        
+        <a name="codeclone27"></a>
+        <code>
+        {
+                                if(isTypeTable){
+                                    row[3] = "TABLE";					
+                                    rows.add(row);
+                                }
+                            }
+        </code>
+        
+        <a name="codeclone28"></a>
+        <code>
+        {
+                if(param1.getBoolean())
+                    return param2.isNull();
+                return param3.isNull();
+            }
+        </code>
+        
+        <a name="codeclone29"></a>
+        <code>
+        {
+                            MutableNumeric num = right.getNumeric();
+                            num.mul(left.getInt());
+                            return num;
+                        }
+        </code>
+        
+        <a name="codeclone30"></a>
+        <code>
+        {
+                if(isNull()) return 0;
+                return Math.pow( param1.getDouble(), param2.getDouble() );
+            }
+        </code>
+        
+        <a name="codeclone31"></a>
+        <code>
+        {
+                try{
+                    if(cal == null){
+                        return getTime(columnIndex);
+                    }
+                    Expression expr = getValue(columnIndex);
+                    wasNull = expr.isNull();
+                    if(wasNull) return null;
+                    return new Time(DateTime.addDateTimeOffset( expr.getLong(), cal.getTimeZone() ));
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone32"></a>
+        <code>
+        {
+                try{
+                    return getCmd().getRow();
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException(e);
+                }
+            }
+        </code>
+        
+        <a name="codeclone33"></a>
+        <code>
+        {
+                try{
+                    if(cal == null){
+                        return getDate(columnIndex);
+                    }
+                    Expression expr = getValue(columnIndex);
+                    wasNull = expr.isNull();
+                    if(wasNull) return null;
+                    return new Date(DateTime.addDateTimeOffset( expr.getLong(), cal.getTimeZone() ));
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone34"></a>
+        <code>
+        {
+                if(isNull()) return null;
+                return getString().getBytes();
+            }
+        </code>
+        
+        <a name="codeclone35"></a>
+        <code>
+        {
+                try{
+                    moveToCurrentRow();
+                    return getCmd().absolute(row);
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException(e);
+                }
+            }
+        </code>
+        
+        <a name="codeclone36"></a>
+        <code>
+        {
+                try{
+                    Expression expr = getValue(columnIndex);
+                    wasNull = expr.isNull();
+                    return expr.getBoolean();
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone37"></a>
+        <code>
+        {
+                try{
+                    Expression expr = getValue(columnIndex);
+                    wasNull = expr.isNull();
+                    if(wasNull) return null;
+                    return DateTime.getTimestamp( expr.getLong() );
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone38"></a>
+        <code>
+        {
+                byte[] bytes = new byte[length];
+                System.arraycopy(puffer, offset, bytes, 0, length);
+                offset += length;
+                return bytes;
+            }
+        </code>
+        
+        <a name="codeclone39"></a>
+        <code>
+        {
+                    String type2 = rs.getString("TABLE_TYPE");
+                    assertTrue( type+"-"+type2, type.compareTo(type2)<0);
+                    type = type2;
+                    count++;
+                }
+        </code>
+        
+        <a name="codeclone40"></a>
+        <code>
+        {
+                if(init) return;
+                Connection con = AllTests.getConnection();
+                Statement st = con.createStatement();
+                dropTable( con, "statement");
+                st.execute("Create Table statement (c varchar(30), i counter)");
+                init = true;
+            }
+        </code>
+        
+        <a name="codeclone41"></a>
+        <code>
+        {
+                Connection con1 = AllTests.getConnection();
+                Connection con2 = AllTests.createConnection();
+                try{		
+                    con2.setTransactionIsolation( Connection.TRANSACTION_READ_COMMITTED );
+                    con1.createStatement().execute("Create Table transactions (i int identity, v varchar(20))");
+                    assertRowCount( 0, "Select * from transactions");
+        
+                    con1.setAutoCommit(false);
+                    con1.createStatement().execute("Insert Into transactions(v) Values('qwert2')");
+        
+                    ResultSet rs2 = con2.createStatement().executeQuery("Select count(*) from transactions");
+                    assertTrue( rs2.next() );
+                    assertEquals( 0, rs2.getInt(1) );
+                }finally{
+                    dropTable(con1, "transactions");
+                    con1.setAutoCommit(true);
+                    con2.close();
+                }
+            }
+        </code>
+        
+        <a name="codeclone42"></a>
+        <code>
+        {
+                if(isNull()) return null;
+                return new Double(getDouble());
+            }
+        </code>
+        
+        <a name="codeclone43"></a>
+        <code>
+        {
+                Connection con = AllTests.getConnection();
+                Statement st = con.createStatement();
+                
+                assertEquals(con, st.getConnection() );
+            }
+        </code>
+        
+        <a name="codeclone44"></a>
+        <code>
+        {
+                                    keyColumnNames.add(column.getName());
+                                    keys.add(valueExpress.getObject());
+                                    break;
+                                }
+        </code>
+        
+        <a name="codeclone45"></a>
+        <code>
+        {
+                try{
+                    Connection con = AllTests.getConnection();
+                    Statement st = con.createStatement();
+                    st.execute("drop table " + table);
+                    st.close();
+                }catch(Throwable e){
+                    //e.printStackTrace();
+                }
+            }
+        </code>
+        
+        <a name="codeclone46"></a>
+        <code>
+        {
+                    try{
+                        con.createStatement().execute("Drop Table transactions");
+                    }catch(Throwable e){e.printStackTrace();}
+                }
+        </code>
+        
+        <a name="codeclone47"></a>
+        <code>
+        {
+                    int idx = internalExpressions.indexOf(expr);
+                    if(idx >= 0) return idx;
+                    internalExpressions.add(expr);
+                    return internalExpressions.size()-1;
+                }
+        </code>
+        
+        <a name="codeclone48"></a>
+        <code>
+        {
+                int precision = 0;
+                for(int i=results.size()-1; i>=0; i--){
+                    precision = Math.max(precision, results.get(i).getPrecision());
+                }
+                return precision;
+            }
+        </code>
+        
+        <a name="codeclone49"></a>
+        <code>
+        {
+                            byte[] buffer = new byte[length];
+                            System.arraycopy(bytes, 0, buffer, 0, Math.min(bytes.length,length) );
+                            return buffer;
+                        }
+        </code>
+        
+        <a name="codeclone50"></a>
+        <code>
+        {
+                        factor *=10;
+                        if(factor == 1000000000){
+                            divImpl(factor);
+                            factor = 1;
+                        }
+                    }
+        </code>
+        
+        <a name="codeclone51"></a>
+        <code>
+        {
+                if(value.length == 0 || signum == 0){
+                    return 0;
+                }else{
+                    if (value.length == 1 && (value[0] > 0)){
+                        // simple Integer Value
+                        return value[0] / scaleDoubleFactor[scale] * signum;
+                    }else
+                    if (value.length == 1){
+                        // overflow Integer Value
+                        long temp = value[0] & 0xFFFFFFFFL;
+                        return temp / scaleDoubleFactor[scale] * signum;
+                    }else
+                    if (value.length == 2 && (value[0] > 0)){
+                        // simple Long Value
+                        long temp = (((long)value[0]) << 32) | (value[1] & 0xFFFFFFFFL);
+                        return temp / scaleDoubleFactor[scale] * signum;
+                    }else{
+                        return new BigDecimal( new BigInteger( toByteArray() ), scale ).doubleValue();
+                    }
+                }
+            }
+        </code>
+        
+        <a name="codeclone52"></a>
+        <code>
+        {
+                if(size >= data.length ){
+                    resize(size << 1);
+                }
+                data[size++] = expr;
+            }
+        </code>
+        
+        <a name="codeclone53"></a>
+        <code>
+        {
+                init();
+                Connection con = AllTests.getConnection();
+                Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                ResultSet rs;
+                int count;
+                
+                rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by i desc, d");
+                
+                //jetzt irgendwo in die Mitte scrollen
+                rs.next();
+                rs.next();
+                rs.previous(); //dann soll der Zeiger nicht am Ende des bereits gefetchten stehen
+                
+                rs.last();
+                count = 0;
+                while(rs.previous()) count++;		
+                assertEquals( valueCount, count );
+        
+                rs.beforeFirst();
+                count = -1;
+                while(rs.next()) count++;		
+                assertEquals( valueCount, count );
+        
+                rs.beforeFirst();
+                count = -1;
+                while(rs.next()) count++;		
+                assertEquals( valueCount, count );
+            }
+        </code>
+        
+        <a name="codeclone54"></a>
+        <code>
+        {
+                    oldValue = rs.getBoolean("b");
+                    assertFalse(rs.wasNull());
+                    count++;
+                }
+        </code>
+        
+        <a name="codeclone55"></a>
+        <code>
+        {
+                init();
+                Connection con = AllTests.getConnection();
+                Statement st = con.createStatement();
+                ResultSet rs;
+                Integer oldValue;
+                
+                rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by i");
+                
+                assertTrue( rs.next() );
+                
+                oldValue = (Integer)rs.getObject("i");
+                assertNull(oldValue);
+                assertTrue( rs.next() );
+                oldValue = (Integer)rs.getObject("i");
+                
+                int count = 1;
+                while(rs.next()){
+                    assertTrue( oldValue.compareTo( (Integer)rs.getObject("i") ) < 0 );
+                    oldValue = (Integer)rs.getObject("i");
+                    count++;
+                }
+                assertEquals( valueCount, count );
+            }
+        </code>
+        
+        <a name="codeclone56"></a>
+        <code>
+        {
+                init();
+                Connection con = AllTests.getConnection();
+                Statement st = con.createStatement();
+                ResultSet rs;
+                Float oldValue;
+                
+                rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by r");
+                
+                assertTrue( rs.next() );
+                
+                oldValue = (Float)rs.getObject("r");
+                assertNull(oldValue);
+                assertTrue( rs.next() );
+                oldValue = (Float)rs.getObject("r");
+                
+                int count = 1;
+                while(rs.next()){
+                    assertTrue( oldValue.compareTo( (Float)rs.getObject("r") ) < 0 );
+                    oldValue = (Float)rs.getObject("r");
+                    count++;
+                }
+                assertEquals( valueCount, count );
+            }
+        </code>
+        
+        <a name="codeclone57"></a>
+        <code>
+        {
+                Connection con = AllTests.getConnection();
+                try{
+                    Statement st = con.createStatement();
+                    st.execute("Create Table DuplicatedColumn(col INT)");
+                    try{
+                        st.execute("ALTER TABLE DuplicatedColumn Add Col INT");
+                        fail("SQLException 'Duplicated Column' should be throw");
+                    }catch(SQLException e){
+                        assertSQLException("01000", 0, e);
+                    }
+                }finally{
+                    dropTable(con, "DuplicatedColumn");
+                }
+            }
+        </code>
+        
+        <a name="codeclone58"></a>
+        <code>
+        {
+                String[] array = new String[size];
+                System.arraycopy(data, 0, array, 0, size);
+                return array;     
+            }
+        </code>
+        
+        <a name="codeclone59"></a>
+        <code>
+        {
+                SSPreparedStatement pr = new SSPreparedStatement( this, sql);
+                pr.setNeedGeneratedKeys(autoGeneratedKeys);
+                return pr;
+            }
+        </code>
+        
+        <a name="codeclone60"></a>
+        <code>
+        {
+                    for(int i=0; i<places; i++){
+                        factor *= 10;
+                    }
+                    value *= factor;
+                }
+        </code>
+        
+        <a name="codeclone61"></a>
+        <code>
+        {
+                        TransactionStep page = (TransactionStep)commitPages.remove(i);
+                        page.rollback();
+                        page.freeLock();
+                    }
+        </code>
+        
+        <a name="codeclone62"></a>
+        <code>
+        {
+                                if(status.nodeValue instanceof IndexNode){
+                                    level++;
+                                    nodeStack.push(
+                                        new IndexNodeScrollStatus( 	(IndexNode)status.nodeValue, 
+                                                                (expressions.get(level).getAlias() != SQLTokenizer.DESC_STR), 
+                                                                scroll, level));
+                                    continue;
+                                }else
+                                    return getReturnValue(status.nodeValue);
+                            }
+                            //There is no RowOffset in this node
+        </code>
+        
+        <a name="codeclone63"></a>
+        <code>
+        {
+                        // There are not the correct count of rows.
+                        if (count == 0){
+                            createTestDataWithClassicInsert( con );
+                            rs = st1.executeQuery( "SELECT count(*) FROM " + tableName);
+                            rs.next();
+                            count = rs.getInt(1);
+                        }
+                        if (count != rowCount){
+                            System.out.println( "  Failed: Only " + (rowCount-count) + " rows were deleted.");
+                            return;
+                        }
+                    }
+        </code>
+        
+        <a name="codeclone64"></a>
+        <code>
+        {
+                            if(expr.isNull())
+                                dataType = expr.getDataType();
+                            else
+                                initValue( expr );
+                        }
+        </code>
+        
+        <a name="codeclone65"></a>
+        <code>
+        {
+                if(!isInit) return;
+                super.printStackTrace(pw);
+            }
+        </code>
+        
+        <a name="codeclone66"></a>
+        <code>
+        {
+                if(size >= data.length ){
+                    resize(size << 1);
+                }
+                data[size++] = foreignKey;
+            }
+        </code>
+        
+        <a name="codeclone67"></a>
+        <code>
+        {
+                ForeignKey[] dataNew = new ForeignKey[newSize];
+                System.arraycopy(data, 0, dataNew, 0, size);
+                data = dataNew;		
+            }
+        </code>
+        
+        <a name="codeclone68"></a>
+        <code>
+        {
+                if(param1.isNull()) return 0;
+                DateTime.Details details = new DateTime.Details(param1.getLong());
+                return details.minute;
+            }
+        </code>
+        
+        <a name="codeclone69"></a>
+        <code>
+        {
+                if(param1.isNull()) return 0;
+                DateTime.Details details = new DateTime.Details(param1.getLong());
+                return details.month+1;
+            }
+        </code>
+        
+        <a name="codeclone70"></a>
+        <code>
+        {
+                try{
+                    Connection con = AllTests.getConnection();
+                    Statement st = con.createStatement();
+                    st.execute("drop table " + table);
+                    st.close();
+                }catch(Throwable e){
+                    //e.printStackTrace();
+                }
+            }
+        </code>
+        
+        <a name="codeclone71"></a>
+        <code>
+        {
+                TestSuite theSuite = new TestSuite("Functions");
+                for(int i=0; i<TESTS.length; i++){
+                    theSuite.addTest(new TestFunctions( TESTS[i] ) );
+                }
+                return theSuite;
+            }
+        </code>
+        
+        <a name="codeclone72"></a>
+        <code>
+        {
+                Set inserted = new HashSet(); // for duplicates checking
+                
+                for (int i = 0; i < entries.length; i++) {
+                    String key = entries[i][0];
+                    
+                    if (! inserted.add(key)) {
+                        throw new IllegalArgumentException("Duplicate key: " + key);
+                    }
+                    else {
+                        String value = entries[i][1];
+                        messages.put(key, value);
+                    }
+                }
+            }
+        </code>
+        
+        <a name="codeclone73"></a>
+        <code>
+        {
+                try{
+                    Expression expr = getValue(i);
+                    wasNull = expr.isNull();
+                    if(wasNull) return null;
+                    return DateTime.getTime( expr.getLong() );
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone74"></a>
+        <code>
+        {
+                if(date == null) return null;
+                return new DateTime( parse(date), SQLTokenizer.TIMESTAMP);
+            }
+        </code>
+        
+        <a name="codeclone75"></a>
+        <code>
+        {
+                try{
+                    Object obj = getValue(i).getObject();
+                    wasNull = obj == null;
+                    return obj;
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone76"></a>
+        <code>
+        {
+                if(date == null) return null;
+                return new DateTime( parse(date), SQLTokenizer.DATE);
+            }
+        </code>
+        
+        <a name="codeclone77"></a>
+        <code>
+        {
+                String sqlState = (String) sqlStates.get(key);
+                assert(sqlState != null): "SQL State code not found: " + key;
+                return sqlState;
+            }
+        </code>
+        
+        <a name="codeclone78"></a>
+        <code>
+        {
+                try{
+                    return Double.parseDouble( val ) != 0;
+                }catch(NumberFormatException e){/*ignore it if it not a number*/}
+                return "true".equalsIgnoreCase( val ) || "yes".equalsIgnoreCase( val ) || "t".equalsIgnoreCase( val );
+            }
+        </code>
+        
+        <a name="codeclone79"></a>
+        <code>
+        {
+                scroll.beforeFirst();
+                isAfterLast  = false;
+                row = 0;
+            }
+        </code>
+        
+        <a name="codeclone80"></a>
+        <code>
+        {
+                Connection con = AllTests.getConnection();
+                try{			
+                    con.createStatement().execute("Create Table Scrollable (i counter, v varchar(20))");
+                    assertRowCount( 0, "Select * from Scrollable");
+        
+                    con.createStatement().execute("Insert Into Scrollable(v) Values('qwert')");
+                    assertRowCount( 1, "Select * from Scrollable");
+                    assertRowCount( 0, "Select * from Scrollable Where 1=0");
+        
+                    Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                    testNextWithWhereAssert( st.executeQuery("Select * from Scrollable Where 1=0") );
+                    testNextWithWhereAssert( st.executeQuery("Select * from Scrollable Where 1=0 Order By v") );
+                    testNextWithWhereAssert( st.executeQuery("Select v from Scrollable Where 1=0 Group By v") );
+                    testNextWithWhereAssert( st.executeQuery("Select v from Scrollable Where 1=0 Group By v Order By v") );
+                }finally{
+                    dropTable( con, "Scrollable");
+                }
+            }
+        </code>
+        
+        <a name="codeclone81"></a>
+        <code>
+        {
+                    for(int i=0; i<places; i++){
+                        factor *= 10;
+                    }
+                    value *= factor;
+                }
+        </code>
+        
+        <a name="codeclone82"></a>
+        <code>
+        {
+                ByteBuffer buffer = ByteBuffer.allocate(8);
+                buffer.putInt(MAGIC_INDEX);
+                buffer.putInt(INDEX_VERSION);
+                buffer.position(0);
+                raFile.write(buffer);
+            }
+        </code>
+        
+        <a name="codeclone83"></a>
+        <code>
+        {
+                if (idx >= size)
+                    throw new IndexOutOfBoundsException("Index: "+idx+", Size: "+size);
+                return data[idx];
+            }
+        </code>
+        
+        <a name="codeclone84"></a>
+        <code>
+        {
+                                Iterator values = locks.values().iterator();
+                                while(values.hasNext()){
+                                    TableStorePage lock = (TableStorePage)values.next();
+                                    if(lock.con != con) return null;
+                                }
+                            }
+        </code>
+        
+        <a name="codeclone85"></a>
+        <code>
+        {
+                TestValue value = new TestValue();
+                value.dataType  = dataType;
+                value.small     = small;
+                value.large     = large;
+                return value;
+            }
+        </code>
+        
+        <a name="codeclone86"></a>
+        <code>
+        {
+                Connection con = AllTests.getConnection();
+                try{			
+                    con.createStatement().execute("Create Table Scrollable (i counter, v varchar(20))");
+                    assertRowCount( 0, "Select * from Scrollable");
+        
+                    con.createStatement().execute("Insert Into Scrollable(v) Values('qwert')");
+                    assertRowCount( 1, "Select * from Scrollable");
+                    assertRowCount( 0, "Select * from Scrollable Where 1=0");
+        
+                    Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                    testFirstWithWhereAssert( st.executeQuery("Select * from Scrollable Where 1=0") );
+                    testFirstWithWhereAssert( st.executeQuery("Select * from Scrollable Where 1=0 Order By v") );
+                    testFirstWithWhereAssert( st.executeQuery("Select v from Scrollable Where 1=0 Group By v") );
+                    testFirstWithWhereAssert( st.executeQuery("Select v from Scrollable Where 1=0 Group By v Order By v") );
+                }finally{
+                    dropTable( con, "Scrollable");
+                }
+            }
+        </code>
+        
+        <a name="codeclone87"></a>
+        <code>
+        {
+                try{
+                    return getCmd().isLast();
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException(e);
+                }
+            }
+        </code>
+        
+        <a name="codeclone88"></a>
+        <code>
+        {
+                        prev = node;
+                        node = node.nextEntry;
+                        wasNextEntry = true;
+                    }
+        </code>
+        
+        <a name="codeclone89"></a>
+        <code>
+        {
+                try{
+                    moveToCurrentRow();
+                    return getCmd().next();
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException(e);
+                }
+            }
+        </code>
+        
+        <a name="codeclone90"></a>
+        <code>
+        {
+                if (idx >= size)
+                    throw new IndexOutOfBoundsException("Column index: "+idx+", Size: "+size);
+                return data[idx];
+            }
+        </code>
+        
+        <a name="codeclone91"></a>
+        <code>
+        {
+                try{
+                    MutableNumeric obj = getValue(columnIndex).getNumeric();
+                    wasNull = obj == null;
+                    if(wasNull) return null;
+                    return obj.toBigDecimal();
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone92"></a>
+        <code>
+        {
+                try{
+                    byte[] obj = getValue(columnIndex).getBytes();
+                    wasNull = obj == null;
+                    return obj;
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone93"></a>
+        <code>
+        {
+                Connection con = AllTests.getConnection();
+                try{			
+                    con.createStatement().execute("Create Table transactions (i int identity, v varchar(20))");
+                    assertRowCount( 0, "Select * from transactions");
+        
+                    con.createStatement().execute("Insert Into transactions(v) Values('qwert')");
+                    assertRowCount( 1, "Select * from transactions");
+        
+                    con.setAutoCommit(false);
+                    con.createStatement().execute("Insert Into transactions(v) Select v From transactions");
+                    assertRowCount( 2, "Select * from transactions");
+        
+                    con.createStatement().execute("Insert Into transactions (Select * From transactions)");
+                    assertRowCount( 4, "Select * from transactions");
+                    
+                    con.commit();
+                    assertRowCount( 4, "Select * from transactions");
+                    
+                }finally{
+                    try{
+                        con.createStatement().execute("Drop Table transactions");
+                    }catch(Throwable e){e.printStackTrace();}
+                    con.setAutoCommit(true);
+                }
+            }
+        </code>
+        
+        <a name="codeclone94"></a>
+        <code>
+        {
+                    try{
+                        con.createStatement().execute("Drop Table transactions");
+                    }catch(Throwable e){e.printStackTrace();}
+                    con.setAutoCommit(true);
+                }
+        </code>
+        
+        <a name="codeclone95"></a>
+        <code>
+        {
+                TestSuite theSuite = new TestSuite("Operatoren");
+                for(int i=0; i<TESTS.length; i++){
+                    theSuite.addTest(new TestOperatoren( TESTS[i] ) );
+                }
+                return theSuite;
+            }
+        </code>
+        
+        <a name="codeclone96"></a>
+        <code>
+        {
+                Object obj = getObject();
+                if(obj == null) return null;
+                return obj.toString();
+            }
+        </code>
+        
+        <a name="codeclone97"></a>
+        <code>
+        {
+                if(rs == null)
+                    throw SmallSQLException.create(Language.RSET_NOT_PRODUCED);
+                return rs;
+            }
+        </code>
+        
+        <a name="codeclone98"></a>
+        <code>
+        {
+                if(value.length == 0 || signum == 0){
+                    return 0;
+                }else{
+                    if (value.length == 1 && (value[0] > 0)){
+                        // simple Integer Value
+                        return value[0] / scaleFloatFactor[scale] * signum;
+                    }else
+                    if (value.length == 1){
+                        // overflow Integer Value
+                        long temp = value[0] & 0xFFFFFFFFL;
+                        return temp / scaleFloatFactor[scale] * signum;
+                    }else
+                    if (value.length == 2 && (value[0] > 0)){
+                        // simple Long Value
+                        long temp = (((long)value[0]) << 32) | (value[1] & 0xFFFFFFFFL);
+                        return temp / scaleFloatFactor[scale] * signum;
+                    }else{
+                        return new BigDecimal( new BigInteger( toByteArray() ), scale ).floatValue();
+                    }
+                }
+            }
+        </code>
+        
+        <a name="codeclone99"></a>
+        <code>
+        {
+                        if(fullReturnCounter >= fullRowCount){
+                            return false; 
+                        }
+                        right.next();
+                    }
+        </code>
+        
+        <a name="codeclone100"></a>
+        <code>
+        {
+                Expression[] dataNew = new Expression[newSize];
+                System.arraycopy(data, 0, dataNew, 0, size);
+                data = dataNew;		
+            }
+        </code>
+        
+        <a name="codeclone101"></a>
+        <code>
+        {
+                if(init) return;
+                Connection con = AllTests.getConnection();
+                Statement st = con.createStatement();
+                dropTable( con, "exceptions");
+                st.execute("Create Table exceptions (c varchar(30), i int)");
+                init = true;
+            }
+        </code>
+        
+        <a name="codeclone102"></a>
+        <code>
+        {
+                if(isNull()) return null;
+                return String.valueOf(getInt());
+            }
+        </code>
+        
+        <a name="codeclone103"></a>
+        <code>
+        {
+                    if(raFile != null)
+                        try{
+                            raFile.close();
+                        }catch(Exception e2){
+                            DriverManager.println(e2.toString());
+                        }
+                    throw SmallSQLException.createFromException(e);
+                }
+        </code>
+        
+        <a name="codeclone104"></a>
+        <code>
+        {
+                SSPreparedStatement pr = new SSPreparedStatement( this, sql);
+                pr.setNeedGeneratedKeys(columnIndexes);
+                return pr;
+            }
+        </code>
+        
+        <a name="codeclone105"></a>
+        <code>
+        {
+                        if(isLast){
+                            node.saveValue(rowOffset);
+                            return null;
+                        }
+                        return node.addRoot();
+                    }
+        </code>
+        
+        <a name="codeclone106"></a>
+        <code>
+        {
+                    for(int i=0; i>places; i--){
+                        factor *= 10;
+                    }
+                    value /= factor;
+                }
+        </code>
+        
+        <a name="codeclone107"></a>
+        <code>
+        {
+                    oldValue = rs.getBoolean("b");
+                    assertFalse(rs.wasNull());
+                    count++;
+                }
+        </code>
+        
+        <a name="codeclone108"></a>
+        <code>
+        {
+                    String newValue = rs.getString("v");
+                    assertTrue( oldValue + "<" + newValue, oldValue.compareTo( newValue ) < 0 );
+                    oldValue = newValue;
+                    count++;
+                }
+        </code>
+        
+        <a name="codeclone109"></a>
+        <code>
+        {
+                StringBuffer buf = new StringBuffer(bytes.length << 1);
+                for(int i=0; i<bytes.length; i++){
+                    buf.append( digits[ (bytes[i] >> 4) & 0x0F ] );
+                    buf.append( digits[ (bytes[i]     ) & 0x0F ] );
+                }
+                return buf.toString();
+            }
+        </code>
+        
+        <a name="codeclone110"></a>
+        <code>
+        {
+                            if(expr.isNull())
+                                dataType = expr.getDataType();
+                            else
+                                initValue( expr );
+                        }
+        </code>
+        
+        <a name="codeclone111"></a>
+        <code>
+        {
+                byte[] daten = new byte[length];
+                System.arraycopy( page, offset, daten, 0, length);
+                offset += length;
+                return daten;
+            }
+        </code>
+        
+        <a name="codeclone112"></a>
+        <code>
+        {
+                if(param1.isNull()) return 0;
+                DateTime.Details details = new DateTime.Details(param1.getLong());
+                return details.day;
+            }
+        </code>
+        
+        <a name="codeclone113"></a>
+        <code>
+        {
+                try{
+                    return Double.parseDouble( val ) != 0;
+                }catch(NumberFormatException e){/*ignore it if it not a number*/}
+                return "true".equalsIgnoreCase( val ) || "yes".equalsIgnoreCase( val ) || "t".equalsIgnoreCase( val );
+            }
+        </code>
+        
+        <a name="codeclone114"></a>
+        <code>
+        {
+                                if(status.nodeValue instanceof IndexNode){
+                                    level++;
+                                    nodeStack.push(
+                                        new IndexNodeScrollStatus( 	(IndexNode)status.nodeValue, 
+                                                                (expressions.get(level).getAlias() != SQLTokenizer.DESC_STR), 
+                                                                scroll, level));
+                                    continue;
+                                }else
+                                    return getReturnValue(status.nodeValue);
+                            }
+        </code>
+        
+        <a name="codeclone115"></a>
+        <code>
+        {
+                        failed = true;
+                        msgBuf.append("\nMissing entries for language ").append( OTHER_LANGUAGES[i] ).append(": ");
+                        
+                        for (Iterator itr = diff.iterator(); itr.hasNext(); ) {
+                            msgBuf.append(itr.next());
+                            if (itr.hasNext()) msgBuf.append(',');
+                        }
+                    }
+        </code>
+        
+        <a name="codeclone116"></a>
+        <code>
+        {
+                if(generatedKeys == null)
+                    throw SmallSQLException.create(Language.GENER_KEYS_UNREQUIRED);
+                return generatedKeys;
+            }
+        </code>
+        
+        <a name="codeclone117"></a>
+        <code>
+        {
+                Connection con = AllTests.getConnection();
+                Statement st = con.createStatement();
+                st.execute("create table "+table+" (keyField varchar(2) primary key)");
+                st.execute("alter table "+table+" add anotherField varchar(4)");
+                ResultSet rs = st.executeQuery("Select * From " + table);
+                assertRSMetaData( rs, new String[]{"keyField", "anotherField"},  new int[]{Types.VARCHAR, Types.VARCHAR} );
+                rs = con.getMetaData().getIndexInfo( null, null, table, false, false );
+                assertRowCount( 1, rs );
+            }
+        </code>
+        
+        <a name="codeclone118"></a>
+        <code>
+        {
+                try{
+                    MutableNumeric obj = getValue(i).getNumeric();
+                    wasNull = obj == null;
+                    if(wasNull) return null;
+                    return obj.toBigDecimal();
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone119"></a>
+        <code>
+        {
+                try{
+                    byte[] obj = getValue(i).getBytes();
+                    wasNull = obj == null;
+                    return obj;
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone120"></a>
+        <code>
+        {
+                        DateTime.Details details2 = new DateTime.Details(param2.getLong());
+                        details2.year += param1.getLong();
+                        return DateTime.calcMillis(details2);
+                    }
+        </code>
+        
+        <a name="codeclone121"></a>
+        <code>
+        {
+                scrollStatus.reset();
+                row = 0;
+                useSetRowPosition = false;
+            }
+        </code>
+        
+        <a name="codeclone122"></a>
+        <code>
+        {
+                    if(raFile != null)
+                        try{
+                            raFile.close();
+                        }catch(Exception e2){
+                            DriverManager.println(e2.toString());
+                        }
+                    throw SmallSQLException.createFromException(e);
+                }
+        </code>
+        
+        <a name="codeclone123"></a>
+        <code>
+        {
+                if(isNull()) return null;
+                return new MutableNumeric(getString().trim());
+            }
+        </code>
+        
+        <a name="codeclone124"></a>
+        <code>
+        {
+                try{
+                    moveToCurrentRow();
+                    return getCmd().relative(rows);
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException(e);
+                }
+            }
+        </code>
+        
+        <a name="codeclone125"></a>
+        <code>
+        {
+                addKeyWord( "ISNULL",      	IFNULL); //alias for IFNULL, used from MS SQL Server with 2 parameter, from MS Access with 1 parameter
+                addKeyWord( "IFNULL",       IFNULL);
+                addKeyWord( "USER",         USER);
+                addKeyWord( "CONVERT",      CONVERT);
+                addKeyWord( "CAST",      	CAST);
+                addKeyWord( "IIF",      	IIF);
+            }
+        </code>
+        
+        <a name="codeclone126"></a>
+        <code>
+        {
+                if(isNull()) return null;
+                return param1.getString().toUpperCase();
+            }
+        </code>
+        
+        <a name="codeclone127"></a>
+        <code>
+        {
+                // for error messages
+                keywords.put( new Integer(LESSER_EQU),	"<=" );
+                keywords.put( new Integer(UNEQUALS),   	"<>" );
+                keywords.put( new Integer(GREATER_EQU), ">=" );
+            }
+        </code>
+        
+        <a name="codeclone128"></a>
+        <code>
+        {
+                            invalidParamCount = true;
+                            expr = null;//only for compiler
+                            break;
+                        }
+        </code>
+        
+        <a name="codeclone129"></a>
+        <code>
+        {
+                    try{
+                        con.createStatement().execute("Drop Table transactions");
+                    }catch(Throwable e){e.printStackTrace();}
+                    con.setAutoCommit(true);
+                }
+        </code>
+        
+        <a name="codeclone130"></a>
+        <code>
+        {
+                    int idx = internalExpressions.indexOf(expr);
+                    if(idx >= 0) return idx;
+                    internalExpressions.add(expr);
+                    return internalExpressions.size()-1;
+                }
+        </code>
+        
+        <a name="codeclone131"></a>
+        <code>
+        {
+                    try{
+                        con.createStatement().execute("Drop Table transactions");
+                    }catch(Throwable e){e.printStackTrace();}
+                }
+        </code>
+        
+        <a name="codeclone132"></a>
+        <code>
+        {
+                Connection con = AllTests.getConnection();
+                try{			
+                    con.createStatement().execute("Create Table transactions (i int identity, v varchar(20))");
+                    assertRowCount( 0, "Select * from transactions");
+        
+                    con.createStatement().execute("Insert Into transactions(v) Values('qwert')");
+                    assertRowCount( 1, "Select * from transactions");
+        
+                    con.setAutoCommit(false);
+                    con.createStatement().execute("Insert Into transactions(v) Select v From transactions");
+                    assertRowCount( 2, "Select * from transactions");
+        
+                    con.createStatement().execute("Insert Into transactions(v) (Select v From transactions)");
+                    assertRowCount( 4, "Select * from transactions");
+                    
+                    con.rollback();
+                    assertRowCount( 1, "Select * from transactions");
+                    
+                }finally{
+                    try{
+                        con.createStatement().execute("Drop Table transactions");
+                    }catch(Throwable e){e.printStackTrace();}
+                    con.setAutoCommit(true);
+                }
+            }
+        </code>
+        
+        <a name="codeclone133"></a>
+        <code>
+        {
+                Connection con1 = AllTests.getConnection();
+                Connection con2 = AllTests.createConnection();
+                try{		
+                    con2.setTransactionIsolation( Connection.TRANSACTION_READ_UNCOMMITTED );
+                    con1.createStatement().execute("Create Table transactions (i int identity, v varchar(20))");
+                    assertRowCount( 0, "Select * from transactions");
+        
+                    con1.setAutoCommit(false);
+                    con1.createStatement().execute("Insert Into transactions(v) Values('qwert2')");
+        
+                    ResultSet rs2 = con2.createStatement().executeQuery("Select count(*) from transactions");
+                    assertTrue( rs2.next() );
+                    assertEquals( 1, rs2.getInt(1) );
+                }finally{
+                    dropTable(con1, "transactions");
+                    con1.setAutoCommit(true);
+                    con2.close();
+                }
+            }
+        </code>
+        
+        <a name="codeclone134"></a>
+        <code>
+        {
+                                    keyColumnNames.add(column.getName());
+                                    keys.add(valueExpress.getObject());
+                                    break;
+                                }
+        </code>
+        
+        <a name="codeclone135"></a>
+        <code>
+        {
+                init();
+                Connection con = AllTests.getConnection();
+                PreparedStatement pr = con.prepareStatement("Select count(*) FROM " + table1 + " Group By name Order By name DESC");
+                for(int i=1; i<=3; i++){
+                    ResultSet rs = pr.executeQuery( );
+                    assertTrue  ( "loop:"+i, rs.next());
+                    assertEquals( "loop:"+i, 1, rs.getInt(1));
+                    assertTrue  ( "loop:"+i, rs.next());
+                    assertEquals( "loop:"+i, 3, rs.getInt(1));
+                }
+            }
+        </code>
+        
+        <a name="codeclone136"></a>
+        <code>
+        {
+                            if(fullReturnCounter >= fullRowCount){
+                               return false; 
+                            }
+                            right.next();
+                        }
+        </code>
+        
+        <a name="codeclone137"></a>
+        <code>
+        {
+                        if(isLast){
+                            node.addNode( digit, rowOffset );
+                            return null;
+                        }
+                        return node.addRoot(digit);
+                    }
+        </code>
+        
+        <a name="codeclone138"></a>
+        <code>
+        {
+                if(isNull()) return 0;
+                return Math.atan2( param1.getDouble(), param2.getDouble() );
+            }
+        </code>
+        
+        <a name="codeclone139"></a>
+        <code>
+        {
+                    String newValue = rs.getString("v");
+                    assertTrue( oldValue.compareTo( newValue ) < 0 );
+                    oldValue = newValue;
+                    count++;
+                }
+        </code>
+        
+        <a name="codeclone140"></a>
+        <code>
+        {
+                    assertTrue( oldValue.compareTo( rs.getString("cc") ) < 0 );
+                    oldValue = rs.getString("cc");
+                    count++;
+                }
+        </code>
+        
+        <a name="codeclone141"></a>
+        <code>
+        {
+                        if(isLastValue){
+                            node.saveValue( rowOffset);
+                            return null;
+                        }
+                        return node.addRoot();
+                    }
+        </code>
+        
+        <a name="codeclone142"></a>
+        <code>
+        {
+                Object obj = getObject();
+                if(obj == null) return null;
+                return obj.toString();
+            }
+        </code>
+        
+        <a name="codeclone143"></a>
+        <code>
+        {
+                    String newValue = rs.getString("v");
+                    assertTrue( oldValue.compareTo( newValue ) < 0 );
+                    oldValue = newValue;
+                    count++;
+                }
+        </code>
+        
+        <a name="codeclone144"></a>
+        <code>
+        {
+                        if(isLast){
+                            node.addRemainderKey( rowOffset, key, i );
+                            return null;
+                        }
+                        return node.addRootValue( key, i );
+                    }
+        </code>
+        
+        <a name="codeclone145"></a>
+        <code>
+        {
+                        TransactionStep page = (TransactionStep)commitPages.get(i);
+                        page.rollback();
+                        page.freeLock();
+                    }
+        </code>
+        
+        <a name="codeclone146"></a>
+        <code>
+        {
+                try{
+                    Statement st = con.createStatement();
+                    st.execute("DELETE FROM " + tableName);
+                    st.close();
+                }catch(Exception e){/* ignore it */}
+            }
+        </code>
+        
+        <a name="codeclone147"></a>
+        <code>
+        {
+                        // There are not the correct count of rows.
+                        if (count == 0){
+                            createTestDataWithClassicInsert( con );
+                            rs = st1.executeQuery( "SELECT count(*) FROM " + tableName);
+                            rs.next();
+                            count = rs.getInt(1);
+                        }
+                        if (count != rowCount){
+                            System.out.println( "  Failed: Only " + (rowCount-count) + " rows were found.");
+                            return;
+                        }
+                    }
+        </code>
+        
+        <a name="codeclone148"></a>
+        <code>
+        {
+                String message = (String) messages.get(key);
+                assert(message != null): "Message code not found: " + key;
+                return message;
+            }
+        </code>
+        
+        <a name="codeclone149"></a>
+        <code>
+        {
+                        recreateTestTab(stat);
+            
+                        stat.execute("CREATE TABLE " + TABLE_NAME + " (id_test INT)");
+                        fail();
+                    }
+        </code>
+        
+        <a name="codeclone150"></a>
+        <code>
+        {
+                    recreateTestTab(stat);
+                    
+                    stat.execute("CREATE TABLE " + TABLE_NAME + " (id_test INT)");
+                    fail();
+                }
+        </code>
+        
+        <a name="codeclone151"></a>
+        <code>
+        {
+                    // trim for CHAR and BINARY
+                    if(obj1 instanceof String) obj1 = ((String)obj1).trim();
+                    if(obj1 instanceof byte[]){
+                        byte[] tmp = (byte[])obj1;
+                        int k=tmp.length-1;
+                        for(; k>= 0; k--) if(tmp[k] != 0) break;
+                        k++;
+                        byte[] tmp2 = new byte[k];
+                        System.arraycopy( tmp, 0, tmp2, 0, k);
+                        obj1 = tmp2;
+                    }
+                }
+        </code>
+        
+        <a name="codeclone152"></a>
+        <code>
+        {
+                Set inserted = new HashSet(); // for duplicates checking
+                
+                for (int i = 0; i < SQL_STATES.length; i++) {
+                    String key = SQL_STATES[i][0];
+                    
+                    if (! inserted.add(key)) {
+                        throw new IllegalArgumentException("Duplicate key: " + key);
+                    }
+                    else {
+                        String value = SQL_STATES[i][1];
+                        sqlStates.put(key, value);
+                    }
+                }
+            }
+        </code>
+        
+        <a name="codeclone153"></a>
+        <code>
+        {
+                    Statement st = con.createStatement();
+                    st.execute("drop table "+name);
+                    st.close();
+                }
+        </code>
+        
+        <a name="codeclone154"></a>
+        <code>
+        {
+                try {
+                    dropTable( AllTests.getConnection(), table );
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        </code>
+        
+        <a name="codeclone155"></a>
+        <code>
+        {
+                                if(isTypeView){
+                                    row[3] = "VIEW";
+                                    rows.add(row);
+                                }
+                            }
+        </code>
+        
+        <a name="codeclone156"></a>
+        <code>
+        {
+                                    Iterator values = locks.values().iterator();
+                                    while(values.hasNext()){
+                                        TableStorePage lock = (TableStorePage)values.next();
+                                        if(lock.con != con) return null;
+                                    }
+                                }
+        </code>
+        
+        <a name="codeclone157"></a>
+        <code>
+        {
+                try{
+                    moveToCurrentRow();
+                    return getCmd().previous();
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException(e);
+                }
+            }
+        </code>
+        
+        <a name="codeclone158"></a>
+        <code>
+        {
+                addKeyWord( "D",    D);
+                addKeyWord( "T",    T);
+                addKeyWord( "TS",   TS);
+                addKeyWord( "FN",   FN);
+                addKeyWord( "CALL", CALL);
+                addKeyWord( "OJ", OJ);
+            }
+        </code>
+        
+        <a name="codeclone159"></a>
+        <code>
+        {
+                // for Error messages
+                keywords.put( new Integer(VALUE),       "<expression>" );
+                keywords.put( new Integer(IDENTIFIER),   "<identifier>" );
+                keywords.put( new Integer(NUMBERVALUE), "<number>" );
+            }
+        </code>
+        
+        <a name="codeclone160"></a>
+        <code>
+        {
+                                invalidParamCount = true;
+                                expr = null;//Only for the compiler
+                                break;
+                            }
+        </code>
+        
+        <a name="codeclone161"></a>
+        <code>
+        {
+                if(isNull()) return null;
+                return new MutableNumeric(getString().trim());
+            }
+        </code>
+        
+        <a name="codeclone162"></a>
+        <code>
+        {
+                        prev = node;
+                        node = node.nextLetter;
+                        wasNextEntry = false;
+                    }
+        </code>
+        
+        <a name="codeclone163"></a>
+        <code>
+        {
+                try{
+                    MutableNumeric obj = getValue(columnIndex).getNumeric();
+                    wasNull = obj == null;
+                    if(wasNull) return null;
+                    return obj.toBigDecimal(scale);
+                }catch(Exception e){
+                    throw SmallSQLException.createFromException( e );
+                }
+            }
+        </code>
+        
+        <a name="codeclone164"></a>
+        <code>
+        {
+                TestValue value = new TestValue();
+                value.dataType  = dataType;
+                value.small     = small;
+                value.large     = large;
+                return value;
+            }
+        </code>
+        
+        <a name="codeclone165"></a>
+        <code>
+        {
+                int precision = 0;
+                for(int i=results.size()-1; i>=0; i--){
+                    precision = Math.max(precision, results.get(i).getScale());
+                }
+                return precision;
+            }
+        </code>
+        
+        <a name="codeclone166"></a>
+        <code>
+        {
+                if(isNull()) return null;
+                return param1.getString().toLowerCase();
+            }
+        </code>
+        
+        <a name="codeclone167"></a>
+        <code>
+        {
+                Connection con = AllTests.getConnection();
+                DatabaseMetaData md = con.getMetaData();
+                assertEquals(con, md.getConnection());
+            }
+        </code>
+        
+        <a name="codeclone168"></a>
+        <code>
+        {
+                        factor *=10;
+                        if(factor == 1000000000){
+                            mul(factor);
+                            factor = 1;
+                        }
+                    }
+        </code>
+        
+        <a name="codeclone169"></a>
+        <code>
+        {
+                init();
+                Connection con = AllTests.getConnection();
+                PreparedStatement pr = con.prepareStatement("Select abs(sum(abs(3-id))+2) FROM " + table1 + " Group By name+'a' Order By 'b'+(Name+'a')");
+                for(int i=1; i<=3; i++){
+                    ResultSet rs = pr.executeQuery( );
+                    assertTrue  ( "loop:"+i, rs.next());
+                    assertEquals( "loop:"+i, 5, rs.getInt(1));
+                    assertTrue  ( "loop:"+i, rs.next());
+                    assertEquals( "loop:"+i, 4, rs.getInt(1));
+                }
+            }
+        </code>
+        
+        <a name="codeclone170"></a>
+        <code>
+        {
+                Expression[] array = new Expression[size];
+                System.arraycopy( data, 0, array, 0, size);
+                return array;
+            }
+        </code>
+        
+        <a name="codeclone171"></a>
+        <code>
+        {
+                            byte[] buffer = new byte[length];
+                            System.arraycopy(bytes, 0, buffer, 0, Math.min(bytes.length,length) );
+                            return buffer;
+                        }
+        </code>
+        
+        <a name="codeclone172"></a>
+        <code>
+        {
+                        result[b] = EXECUTE_FAILED;
+                        if(failed == null){
+                            failed = new BatchUpdateException(ex.getMessage(), ex.getSQLState(), ex.getErrorCode(), result);
+                            failed.initCause(ex);
+                        }
+                        failed.setNextException(ex);
+                    }
+        </code>
+        
+        <a name="codeclone173"></a>
+        <code>
+        {
+                        if(isLastValue){
+                            node.addRemainderKey( rowOffset, key, i );
+                            return null;
+                        }
+                        return node.addRootValue( key, i);
+                    }
+        </code>
+        
+        <a name="codeclone174"></a>
+        <code>
+        {
+                Connection con = AllTests.getConnection();
+                try{
+                    Statement st = con.createStatement();
+                    st.execute("Create Table DuplicatedColumn(col INT)");
+                    try{
+                        st.execute("INSERT INTO DuplicatedColumn(col,Col) Values(1,2)");
+                        fail("SQLException 'Duplicated Column' should be throw");
+                    }catch(SQLException e){
+                        assertSQLException("01000", 0, e);
+                    }
+                }finally{
+                    dropTable(con, "DuplicatedColumn");
+                }
+            }
+        </code>
+        
+        <a name="codeclone175"></a>
+        <code>
+        {
+                    assertTrue( oldValue.compareTo( rs.getString("v") ) < 0 );
+                    oldValue = rs.getString("v");
+                    count++;
+                }
+        </code>
+        
+        <a name="codeclone176"></a>
+        <code>
+        {
+                init();
+                Connection con = AllTests.getConnection();
+                Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                ResultSet rs;
+                int count;
+                
+                rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by v");
+                
+                //jetzt irgendwo in die Mitte scrollen
+                rs.next();
+                rs.next();
+                rs.previous(); //dann soll der Zeiger nicht am Ende des bereits gefetchten stehen
+                
+                rs.last();
+                count = 0;
+                while(rs.previous()) count++;		
+                assertEquals( valueCount, count );
+        
+                rs.beforeFirst();
+                count = -1;
+                while(rs.next()) count++;		
+                assertEquals( valueCount, count );
+        
+                rs.beforeFirst();
+                count = -1;
+                while(rs.next()) count++;		
+                assertEquals( valueCount, count );
+            }
+        </code>
+        
+        <a name="codeclone177"></a>
+        <code>
+        {
+                        if(isLastValue){
+                            node.addNode( digit, rowOffset );
+                            return null;
+                        }
+                        return node.addRoot(digit);
+                    }
+        </code>
+        
+        <a name="codeclone178"></a>
+        <code>
+        {
+                init();
+                Connection con = AllTests.getConnection();
+                Statement st = con.createStatement();
+                ResultSet rs;
+                String oldValue;
+                
+                rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by v desc, i asc");
+                
+                assertTrue( rs.next() );
+                oldValue = rs.getString("v");
+                
+                int count = 1;
+                while(oldValue != null && rs.next()){
+                    String newValue = rs.getString("v");
+                    if(newValue != null){
+                        assertTrue( oldValue.compareTo( newValue ) > 0 );
+                        count++;
+                    }
+                    oldValue = newValue;
+                }
+                assertNull(oldValue);
+                assertFalse( rs.next() );
+        
+                assertEquals( valueCount, count );
+            }
+        </code>
+        
+        <a name="codeclone179"></a>
+        <code>
+        {
+                init();
+                Connection con = AllTests.getConnection();
+                Statement st = con.createStatement();
+                ResultSet rs;
+                String oldValue;
+                
+                rs = st.executeQuery("SELECT * FROM " + table1 + " ORDER  by v desc");
+                
+                assertTrue( rs.next() );
+                oldValue = rs.getString("v");
+                
+                int count = 1;
+                while(oldValue != null && rs.next()){
+                    String newValue = rs.getString("v");
+                    if(newValue != null){
+                        assertTrue( oldValue.compareTo( newValue ) > 0 );
+                        count++;
+                    }
+                    oldValue = newValue;
+                }
+                assertNull(oldValue);
+                assertFalse( rs.next() );
+        
+                assertEquals( valueCount, count );
+            }
+        </code>
+        
+        </body></html>

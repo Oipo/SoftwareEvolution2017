@@ -12,7 +12,9 @@
         "favicon.ico",
         "clonesWheel.json",
         "clonesTreemap.json",
-        "codeClones.html"
+        "codeClones.html",
+        "prism.js",
+        "prism.css"
       ],
       "index": "index.html",
       "main": "main.ts",
