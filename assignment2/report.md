@@ -118,7 +118,7 @@ getMetrics(a, m);
 rascal>getMetrics(a, m);
 Code clone type-1:
 Number of clones:               148
-Number of clone classes:        88
+Number of clone classes:        44
 Biggest clone class:            <11,|project://smallsql0.21_src/src/smallsql/database/IndexScrollStatus.java|(4128,400,<120,33>,<131,41>)>
 Number of cloned lines:         561
 Percentage of cloned lines:     2.332640333%
@@ -130,15 +130,15 @@ First two clone classes:
 
 Code clone type-2:
 Number of clones:               882
-Number of clone classes:        180
+Number of clone classes:        90
 Biggest clone class:            <23,|project://smallsql0.21_src/src/smallsql/junit/TestOrderBy.java|(19300,752,<729,57>,<757,2>)>
 Number of cloned lines:         1945
 Percentage of cloned lines:     8.087318087%
 
 First two clone classes:
-<|project://smallsql0.21_src/src/smallsql/database/Money.java|(1873,97,<61,59>,<65,5>),1,"{\r\n        Money money = new Money();\r\n        money.value = value;\r\n        return money;\r\n    }">
+<|project://smallsql0.21_src/src/smallsql/database/Index.java|(14526,111,<425,47>,<431,4>),1,"{\r\n\t\t\t\tif(isLast){\r\n\t\t\t\t\tnode.saveValue(rowOffset);\r\n\t\t\t\t\treturn null;\r\n\t\t\t\t}\r\n\t\t\t\treturn node.addRoot();\r\n\t\t\t}">
 
-<|project://smallsql0.21_src/src/smallsql/database/ExpressionFunctionDayOfYear.java|(1597,139,<48,37>,<52,2>),1,"{\r\n\t\tif(param1.isNull()) return 0;\r\n\t\tDateTime.Details details = new DateTime.Details(param1.getLong());\r\n\t\treturn details.dayofyear+1;\r\n\t}">
+<|project://smallsql0.21_src/src/smallsql/database/ExpressionFunctionReturnP1StringAndBinary.java|(2434,84,<80,52>,<83,2>),1,"{\r\n\t\tif(isNull()) return null;\r\n\t\treturn new MutableNumeric(getString().trim());\r\n\t}">
 
 ok
 ```
@@ -146,30 +146,30 @@ ok
 ## hsqldb
 
 ```
-getMetrics(a2, m2)
+rascal>getMetrics(a2, m2);
 Code clone type-1:
-Number of clones:               3952
-Number of clone classes:        772
-Biggest clone class:            <70,|project://hsqldb/src/org/hsqldb/server/Servlet.java|(9474,4474,<245,60>,<344,5>)>
-Number of cloned lines:         8703
-Percentage of cloned lines:     5.046797258%
+Number of clones:               3890
+Number of clone classes:        355
+Biggest clone class:            <46,|project://hsqldb-2.3.1/hsqldb/src/org/hsqldb/util/DatabaseManagerSwing.java|(19065,2326,<478,45>,<539,9>)>
+Number of cloned lines:         7471
+Percentage of cloned lines:     4.415902213%
 
 First two clone classes:
-<|project://hsqldb/integration/hibernate/src/org/hibernate/dialect/HSQLDialect.java|(13357,846,<250,68>,<266,9>),1,"{\n                if ( hsqldbVersion \< 20 ) {\n                        return new StringBuffer( sql.length() + 10 )\n                                        .append( sql )\n                                        .insert(\n                                                        sql.toLowerCase().indexOf( \"select\" ) + 6,\n                                                        hasOffset ? \" limit ? ?\" : \" top ?\"\n                                        )\n                                        .toString();\n                }\n                else {\n                        return new StringBuffer( sql.length() + 20 )\n                                        .append( sql )\n                                        .append( hasOffset ? \" offset ? limit ?\" : \" limit ?\" )\n                                        .toString();\n                }\n        }">
+<|project://hsqldb-2.3.1/hsqldb/src/org/hsqldb/RangeVariableResolver.java|(6894,282,<189,42>,<196,17>),1,"{\n                    int index = rangeVarSet.getIndex(range);\n\n                    if (index \> 0) {\n                        rangeVariables[index].isLeftJoin      = false;\n                        rangeVariables[index - 1].isRightJoin = false;\n                    }\n                }">
 
-<|project://hsqldb/src/org/hsqldb/test/TestLobs.java|(17352,369,<530,43>,<539,13>),1,"{\n                reader = dataClob.getCharacterStream();\n\n                ps.setString(1, \"test-id-1\" + i);\n                ps.setLong(2, 23456789123456L + i);\n                ps.setCharacterStream(3, reader, dataClob.length());\n                ps.setString(4, \"test-scope-1\" + i);\n                ps.executeUpdate();\n                connection.commit();\n            }">
+<|project://hsqldb-2.3.1/hsqldb/src/org/hsqldb/Scanner.java|(47039,273,<1781,53>,<1788,21>),1,"{\n\n                        /** @todo 1.9.0 - review message malformed character set identifier */\n                        token.tokenType   = Tokens.X_MALFORMED_STRING;\n                        token.isMalformed = true;\n\n                        return;\n                    }">
 
 Code clone type-2:
-Number of clones:               5802
-Number of clone classes:        1682
-Biggest clone class:            <82,|project://hsqldb/src/org/hsqldb/dbinfo/DatabaseInformationMain.java|(132183,4390,<3209,73>,<3312,5>)>
-Number of cloned lines:         20890
-Percentage of cloned lines:     12.11393712%
+Number of clones:               5742
+Number of clone classes:        812
+Biggest clone class:            <81,|project://hsqldb-2.3.1/hsqldb/src/org/hsqldb/dbinfo/DatabaseInformationMain.java|(127755,4353,<3105,66>,<3207,5>)>
+Number of cloned lines:         19681
+Percentage of cloned lines:     11.63289673%
 
 First two clone classes:
-<|project://hsqldb/src/org/hsqldb/test/TestSql.java|(31289,323,<909,30>,<923,5>),1,"{\n\n        try {\n            stmnt.execute(\"SHUTDOWN\");\n\n            if (!isNetwork) {\n                connection.close();\n            }\n        } catch (Exception e) {\n            e.printStackTrace();\n            System.out.println(\"TestSql.tearDown() error: \" + e.getMessage());\n        }\n\n        super.tearDown();\n    }">
+<|project://hsqldb-2.3.1/hsqldb/src/org/hsqldb/ClientConnection.java|(12069,314,<371,57>,<380,5>),1,"{\n\n        if (mode != isAutoCommit) {\n            setAttribute(SessionInterface.INFO_AUTOCOMMIT, mode ? Boolean.TRUE\n                                                                : Boolean\n                                                                .FALSE);\n\n            isAutoCommit = mode;\n        }\n    }">
 
-<|project://hsqldb/src/org/hsqldb/test/TestLobs.java|(2951,249,<86,12>,<93,9>),6,"{\n            String ddl0 = \"DROP TABLE BLOBTEST IF EXISTS\";\n            String ddl1 =\n                \"CREATE TABLE BLOBTEST(ID IDENTITY, BLOBFIELD BLOB(100000))\";\n\n            statement.execute(ddl0);\n            statement.execute(ddl1);\n        }">
+<|project://hsqldb-2.3.1/hsqldb/src/org/hsqldb/test/TestMerge.java|(2229,182,<59,27>,<67,5>),2,"{\n\n        super.setUp();\n\n        try {\n            connection = super.newConnection();\n            stmnt      = connection.createStatement();\n        } catch (Exception e) {}\n    }">
 ```
 
 ## tests
