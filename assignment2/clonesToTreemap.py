@@ -9,7 +9,7 @@ for line in f:
     l = line.split('|')
 
     if len(l) == 5:
-        x = {'name': l[1], 'size': l[3], 'class': l[0]}
+        x = {'name': l[1], 'size': l[3], 'cloneTag': 'codeclone' + l[0]}
 
         if l[0] in temp:
             temp[l[0]].append(x)

@@ -93,24 +93,24 @@ map[loc, set[loc]] groupCodeClones(set[tuple[loc, loc]] clones) {
 
 void outputClones(set[tuple[loc, loc]] clones) {
 	map[loc, set[loc]] groupedClones = groupCodeClones(clones);
-	loc fn = |project://visualizaton/src/codeClones.html|;
+	//loc fn = |project://../visualizaton/src/codeClones2.html|;
+	loc fn = |project://assignment2/codeClones.html|;
 	loc out = |project://assignment2/clones.txt|;
 	int i = 0;
 	
 	writeFile(out, "");
-	writeFile(fn, "\<html\>\<body\>\n\n");
+	writeFile(fn, "\<html\>\n\<head\>\<link href=\"prism.css\" rel=\"stylesheet\" /\>\n\n\<body\>\n\n\<script src=\"prism.js\"\>\</script\>\n\n");
 	
 	for (key <- groupedClones) {
 		appendToFile(fn, "\<a name=\"codeclone<i>\"\>\</a\>\n");
-		appendToFile(fn, "\<code\>\n");
+		appendToFile(fn, "\<pre\>\<code class=\"language-java\"\>\n");
 		appendToFile(fn, replaceAll(readFile(key), "\n", "\<br/\>"));
-		appendToFile(fn, "\n\</code\>\<br/\>\<br/\>\n\n");
+		appendToFile(fn, "\n\</code\>\</pre\>\<br/\>\<br/\>\n\n");
 		
 		appendToFile(out, "<i><key>|<get_volume([key])>|\n");
 		
 		for (clone <- groupedClones[key]) {
 			appendToFile(out, "<i><clone>|<get_volume([clone])>|\n");
-			//println(clone);
 		}
 		
 		i += 1;
