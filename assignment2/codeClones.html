@@ -37,72 +37,72 @@
 
 <a name="codeclone6"></a>
 <pre><code class="language-java">
-{<br/>        Connection con = AllTests.getConnection();<br/>        Statement st = con.createStatement();<br/>        st.execute("create table "+table+" (a varchar(2) unique)");<br/>        st.execute("alter table "+table+" add b varchar(4) primary key");<br/>        ResultSet rs = st.executeQuery("Select * From " + table);<br/>        assertRSMetaData( rs, new String[]{"a", "b"},  new int[]{Types.VARCHAR, Types.VARCHAR} );<br/>        rs = con.getMetaData().getIndexInfo( null, null, table, false, false );<br/>        assertRowCount( 2, rs );<br/>    }
+{<br/>			// trim for CHAR and BINARY<br/>			if(obj2 instanceof String) obj2 = ((String)obj2).trim();<br/>			if(obj2 instanceof byte[]){<br/>				byte[] tmp = (byte[])obj2;<br/>				int k=tmp.length-1;<br/>				for(; k>= 0; k--) if(tmp[k] != 0) break;<br/>				k++;<br/>				byte[] tmp2 = new byte[k];<br/>				System.arraycopy( tmp, 0, tmp2, 0, k);<br/>				obj2 = tmp2;<br/>			}<br/>		}
 </code></pre><br/><br/>
 
 <a name="codeclone7"></a>
 <pre><code class="language-java">
-{<br/>			// trim for CHAR and BINARY<br/>			if(obj2 instanceof String) obj2 = ((String)obj2).trim();<br/>			if(obj2 instanceof byte[]){<br/>				byte[] tmp = (byte[])obj2;<br/>				int k=tmp.length-1;<br/>				for(; k>= 0; k--) if(tmp[k] != 0) break;<br/>				k++;<br/>				byte[] tmp2 = new byte[k];<br/>				System.arraycopy( tmp, 0, tmp2, 0, k);<br/>				obj2 = tmp2;<br/>			}<br/>		}
+{<br/>		if(isNull()) return 0;<br/>        return Math.cos( param1.getDouble() );<br/>    }
 </code></pre><br/><br/>
 
 <a name="codeclone8"></a>
 <pre><code class="language-java">
-{<br/>		if(isNull()) return 0;<br/>        return Math.cos( param1.getDouble() );<br/>    }
+{<br/>        try{<br/>            Expression expr = getValue(i);<br/>            wasNull = expr.isNull();<br/>            return expr.getInt();<br/>        }catch(Exception e){<br/>            throw SmallSQLException.createFromException( e );<br/>        }<br/>    }
 </code></pre><br/><br/>
 
 <a name="codeclone9"></a>
 <pre><code class="language-java">
-{<br/>        try{<br/>            Expression expr = getValue(i);<br/>            wasNull = expr.isNull();<br/>            return expr.getInt();<br/>        }catch(Exception e){<br/>            throw SmallSQLException.createFromException( e );<br/>        }<br/>    }
+{<br/>		if(isNull()) return null;<br/>		return new MutableNumeric(getLong());<br/>	}
 </code></pre><br/><br/>
 
 <a name="codeclone10"></a>
 <pre><code class="language-java">
-{<br/>		if(isNull()) return null;<br/>		return new MutableNumeric(getLong());<br/>	}
+{<br/>		try {<br/>			Statement st = con.createStatement();<br/>			st.execute("drop view "+name);<br/>			st.close();<br/>		} catch (SQLException e) {/* ignore it, if the view not exist */}<br/>    }
 </code></pre><br/><br/>
 
 <a name="codeclone11"></a>
 <pre><code class="language-java">
-{<br/>		try {<br/>			Statement st = con.createStatement();<br/>			st.execute("drop view "+name);<br/>			st.close();<br/>		} catch (SQLException e) {/* ignore it, if the view not exist */}<br/>    }
+{<br/>                result[i] = EXECUTE_FAILED;<br/>                if(failed == null){<br/>                    failed = new BatchUpdateException(ex.getMessage(), ex.getSQLState(), ex.getErrorCode(), result);<br/>                    failed.initCause(ex);<br/>                }<br/>                failed.setNextException(ex);<br/>            }
 </code></pre><br/><br/>
 
 <a name="codeclone12"></a>
 <pre><code class="language-java">
-{<br/>                result[i] = EXECUTE_FAILED;<br/>                if(failed == null){<br/>                    failed = new BatchUpdateException(ex.getMessage(), ex.getSQLState(), ex.getErrorCode(), result);<br/>                    failed.initCause(ex);<br/>                }<br/>                failed.setNextException(ex);<br/>            }
+{<br/>		if(isNull()) return null;<br/>		return Utils.getInteger(getInt());<br/>	}
 </code></pre><br/><br/>
 
 <a name="codeclone13"></a>
 <pre><code class="language-java">
-{<br/>		if(isNull()) return null;<br/>		return Utils.getInteger(getInt());<br/>	}
+{<br/>				DateTime.Details details2 = new DateTime.Details(param2.getLong());<br/>				details2.month += param1.getLong();<br/>				return DateTime.calcMillis(details2);<br/>			}
 </code></pre><br/><br/>
 
 <a name="codeclone14"></a>
 <pre><code class="language-java">
-{<br/>				DateTime.Details details2 = new DateTime.Details(param2.getLong());<br/>				details2.month += param1.getLong();<br/>				return DateTime.calcMillis(details2);<br/>			}
+{<br/>        try {<br/>            dropTable( AllTests.getConnection(), table );<br/>        } catch (SQLException ex) {<br/>            ex.printStackTrace();<br/>        }<br/>    }
 </code></pre><br/><br/>
 
 <a name="codeclone15"></a>
 <pre><code class="language-java">
-{<br/>                failed = true;<br/>                msgBuf.append("\nAdditional entries for language ").append( OTHER_LANGUAGES[i] ).append(": ");<br/>                <br/>                for (Iterator itr = diff.iterator(); itr.hasNext(); ) {<br/>                    msgBuf.append(itr.next());<br/>                    if (itr.hasNext()) msgBuf.append(',');<br/>                }<br/>            }
+{<br/>        try{<br/>            String obj = getValue(i).getString();<br/>            wasNull = obj == null;<br/>            return obj;<br/>        }catch(Exception e){<br/>            throw SmallSQLException.createFromException( e );<br/>        }<br/>    }
 </code></pre><br/><br/>
 
 <a name="codeclone16"></a>
 <pre><code class="language-java">
-{<br/>        try {<br/>            dropTable( AllTests.getConnection(), table );<br/>        } catch (SQLException ex) {<br/>            ex.printStackTrace();<br/>        }<br/>    }
+{<br/>		StringBuffer buf = new StringBuffer(bytes.length << 1);<br/>		for(int i=0; i<bytes.length; i++){<br/>			buf.append( digits[ (bytes[i] >> 4) & 0x0F ] );<br/>			buf.append( digits[ (bytes[i]     ) & 0x0F ] );<br/>		}<br/>		return buf.toString();<br/>	}
 </code></pre><br/><br/>
 
 <a name="codeclone17"></a>
 <pre><code class="language-java">
-{<br/>        try{<br/>            String obj = getValue(i).getString();<br/>            wasNull = obj == null;<br/>            return obj;<br/>        }catch(Exception e){<br/>            throw SmallSQLException.createFromException( e );<br/>        }<br/>    }
+{<br/>        try{<br/>            MutableNumeric obj = getValue(i).getNumeric();<br/>            wasNull = obj == null;<br/>            if(wasNull) return null;<br/>            return obj.toBigDecimal(scale);<br/>        }catch(Exception e){<br/>            throw SmallSQLException.createFromException( e );<br/>        }<br/>    }
 </code></pre><br/><br/>
 
 <a name="codeclone18"></a>
 <pre><code class="language-java">
-{<br/>		StringBuffer buf = new StringBuffer(bytes.length << 1);<br/>		for(int i=0; i<bytes.length; i++){<br/>			buf.append( digits[ (bytes[i] >> 4) & 0x0F ] );<br/>			buf.append( digits[ (bytes[i]     ) & 0x0F ] );<br/>		}<br/>		return buf.toString();<br/>	}
+{<br/>                failed = true;<br/>                msgBuf.append("\nAdditional entries for language ").append( OTHER_LANGUAGES[i] ).append(": ");<br/>                <br/>                for (Iterator itr = diff.iterator(); itr.hasNext(); ) {<br/>                    msgBuf.append(itr.next());<br/>                    if (itr.hasNext()) msgBuf.append(',');<br/>                }<br/>            }
 </code></pre><br/><br/>
 
 <a name="codeclone19"></a>
 <pre><code class="language-java">
-{<br/>        try{<br/>            MutableNumeric obj = getValue(i).getNumeric();<br/>            wasNull = obj == null;<br/>            if(wasNull) return null;<br/>            return obj.toBigDecimal(scale);<br/>        }catch(Exception e){<br/>            throw SmallSQLException.createFromException( e );<br/>        }<br/>    }
+{<br/>        Connection con = AllTests.getConnection();<br/>        Statement st = con.createStatement();<br/>        st.execute("create table "+table+" (a varchar(2) unique)");<br/>        st.execute("alter table "+table+" add b varchar(4) primary key");<br/>        ResultSet rs = st.executeQuery("Select * From " + table);<br/>        assertRSMetaData( rs, new String[]{"a", "b"},  new int[]{Types.VARCHAR, Types.VARCHAR} );<br/>        rs = con.getMetaData().getIndexInfo( null, null, table, false, false );<br/>        assertRowCount( 2, rs );<br/>    }
 </code></pre><br/><br/>
 
 <a name="codeclone20"></a>
@@ -122,22 +122,22 @@
 
 <a name="codeclone23"></a>
 <pre><code class="language-java">
-{<br/>						if(isTypeTable){<br/>							row[3] = "TABLE";					<br/>							rows.add(row);<br/>						}<br/>					}
+{<br/>		if(param1.getBoolean())<br/>			return param2.getFloat();<br/>		return param3.getFloat();<br/>	}
 </code></pre><br/><br/>
 
 <a name="codeclone24"></a>
 <pre><code class="language-java">
-{<br/>		if(param1.getBoolean())<br/>			return param2.getFloat();<br/>		return param3.getFloat();<br/>	}
+{<br/>        ByteBuffer buffer = ByteBuffer.allocate(8);<br/>        buffer.putInt(MAGIC_TABLE);<br/>        buffer.putInt(TABLE_VIEW_VERSION);<br/>        buffer.position(0);<br/>        raFile.write(buffer);<br/>	}
 </code></pre><br/><br/>
 
 <a name="codeclone25"></a>
 <pre><code class="language-java">
-{<br/>        ByteBuffer buffer = ByteBuffer.allocate(8);<br/>        buffer.putInt(MAGIC_TABLE);<br/>        buffer.putInt(TABLE_VIEW_VERSION);<br/>        buffer.position(0);<br/>        raFile.write(buffer);<br/>	}
+{<br/>        if(isNull()) return null;<br/>        return getObject().toString();<br/>    }
 </code></pre><br/><br/>
 
 <a name="codeclone26"></a>
 <pre><code class="language-java">
-{<br/>        if(isNull()) return null;<br/>        return getObject().toString();<br/>    }
+{<br/>						if(isTypeTable){<br/>							row[3] = "TABLE";					<br/>							rows.add(row);<br/>						}<br/>					}
 </code></pre><br/><br/>
 
 <a name="codeclone27"></a>
@@ -447,7 +447,7 @@
 
 <a name="codeclone88"></a>
 <pre><code class="language-java">
-{<br/>			recreateTestTab(stat);<br/>			<br/>			stat.execute("CREATE TABLE " + TABLE_NAME + " (id_test INT)");<br/>			fail();<br/>		}
+{<br/>				recreateTestTab(stat);<br/>	<br/>				stat.execute("CREATE TABLE " + TABLE_NAME + " (id_test INT)");<br/>				fail();<br/>			}
 </code></pre><br/><br/>
 
 <a name="codeclone89"></a>
