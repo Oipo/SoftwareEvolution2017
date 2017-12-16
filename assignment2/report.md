@@ -200,7 +200,7 @@ Results:
 ```
 Running tests for clone_tests
 Test report for clone_tests                                                               
-        all 5/5 tests succeeded
+        all 6/6 tests succeeded
 bool: true
 ```
 

@@ -61,3 +61,18 @@ test bool type3_simple() {
 	clonedLines2 = get_volume(toList({l | <l, _> <- cs2}));
 	return size(cs) == 0 && clonedLines == 0 && size(cs2) == 0 && clonedLines2 == 0;
 }
+
+// Test to check if clone classes are correctly de-duplicated
+test bool group_clones() {
+	set[tuple[loc, loc]] clones = {};
+	clones += <|project:///test1.java|, |project:///test2.java|>;
+	clones += <|project:///test2.java|, |project:///test1.java|>;
+	clones += <|project:///test1.java|(0,4,<0,0>,<4,0>), |project:///test1.java|(0,4,<0,0>,<5,0>)>;
+	clones += <|project:///test1.java|(0,4,<0,0>,<4,0>), |project:///test2.java|(0,4,<0,0>,<4,0>)>;
+	clones += <|project:///test2.java|(0,4,<0,0>,<4,0>), |project:///test1.java|(0,4,<0,0>,<4,0>)>;
+	clones += <|project:///test1.java|(0,4,<0,0>,<4,0>), |project:///test3.java|(0,4,<0,0>,<4,0>)>;
+	clones += <|project:///test1.java|(0,4,<0,0>,<4,0>), |project:///test4.java|(0,4,<0,0>,<4,0>)>;
+	
+	gcl = groupCodeClones(clones);
+	return size(gcl) == 2;
+}
