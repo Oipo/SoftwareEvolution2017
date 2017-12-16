@@ -79,6 +79,7 @@ export class TreemapComponent implements OnInit, OnDestroy {
           .attr("id", function(d: any) { return d.data.id; })
           .attr("width", function(d: any) { return d.x1 - d.x0; })
           .attr("height", function(d: any) { return d.y1 - d.y0; })
+          .on("click", function(d: any) { window.open("http://localhost:4200/codeClones.html#" + d.data.cloneTag); })
           .attr("fill", function(d: any) { return color(d.parent.data.id); });
 
       cell.append("clipPath")

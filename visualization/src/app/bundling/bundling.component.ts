@@ -92,6 +92,7 @@ export class BundlingComponent implements OnInit, OnDestroy {
           .attr("transform", function(d: any) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
           .attr("text-anchor", function(d: any) { return d.x < 180 ? "start" : "end"; })
           .text(function(d: any) { return d.data.key; })
+          .on("click", function(d: any) { console.log(d); window.open("http://localhost:4200/codeClones.html#" + d.data.cloneTag); })
           .on("mouseover", mouseovered)
           .on("mouseout", mouseouted);
     });
