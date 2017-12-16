@@ -1,6 +1,6 @@
 Best viewable in https://dillinger.io/
 
-# Method
+# *Method*
 ```
 for each block b in ast:
         bucket = countStatements(b)
@@ -15,7 +15,7 @@ for each block i and j in the same bucket:
                 addClonePair(clones, i, j)
 ```
 
-# Visualization
+# *Visualization*
 
 For visualizing code clones, we implemented two visualizations: the Treemap and the Hierachical Tree Bundling (HTB). The Treemap is to be used for interactivity and an overview of all code clones and the HTB is used for a high level view.
 
@@ -48,13 +48,14 @@ However, HTB is unfit for the purpose of showing source code due to potentially 
 
 Further work could be done to improve visualization. There is a zoomable treemap version and another possible is an overlay of the hierarchical tree bundling on a treemap. Especially the zooming treemap could achieve a reduction of mental overhead for larger systems. Another improvement would be to make HTB more interactive by adding a visualization method specifically for one selected file and showing all its contained code clones in other files. However, this would overlap with some of the functionality of the Treemap. A better alternative would perhaps be to highlight the filename and its linked files in the HTB when hovering over a code clone class in the Treemap.
 
-# how to use
+# *how to use*
 
 ## Prerequisites
 
 - Nodejs 8 or higher
 - Python version 2 or 3
 - Eclipse + Rascal plugin
+- msys2 on windows or any linux terminal
 
 ## Show me the visualization results
 
@@ -73,19 +74,21 @@ Open rascal project assignment2
 import clone_detection;
 import lang::java::jdt::m3::AST;
 a = createAstsFromEclipseProject(|project:///example|, true);
-clones(a, 1); // for type 1
-clones(a, 2); // for type 1 & 2
+cs = clones(a, 1); // for type 1
+cs = clones(a, 2); // for type 1 & 2
+outputClones(cs); // write code clones to html file
 ```
 
-Open a command window to convert rascal output to json
+Open a command line in the assignment2 directory.
+
 ```
 python clonesToWheel.py clones.txt ../visualization/src/clonesWheel.json
 python clonesToTreemap.py clones.txt ../visualization/src/clonesTreemap.json
+cp codeClones.html ../visualization/src/codeClones.html
 ```
 
-Save the resulting text file and run it through test.py
-Use the resulting json file and put it in flare.json
-Install nodejs 8 or higher
+Open a command line in the visualization directory.
+
 ```
 npm install
 npm start
@@ -107,7 +110,7 @@ m = createM3FromEclipseProject(|project:///example|);
 getMetrics(a, m);
 ```
 
-# Metrics Results
+# *Metrics Results*
 
 ## smallsql0.21_src
 
@@ -182,12 +185,12 @@ Test report for clone_tests
 bool: true
 ```
 
-# time taken
+# *time taken*
 
 - Michael: 40 hours
 - Constantijn: 60 hours
 
-# References
+# *References*
 
 [1] I. D. Baxter, A. Yahin, L. Moura, M. Sant'Anna and L. Bier, "Clone detection using abstract syntax trees," Proceedings. International Conference on Software Maintenance (Cat. No. 98CB36272), Bethesda, MD, 1998, pp. 368-377.
 doi: 10.1109/ICSM.1998.738528
