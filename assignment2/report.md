@@ -165,30 +165,30 @@ ok
 ## hsqldb
 
 ```
-rascal>getMetrics(a2, m2);
+rascal>getMetrics(ha, hm);
 Code clone type-1:
-Number of clones:               3890
-Number of clone classes:        355
-Biggest clone class:            <46,|project://hsqldb-2.3.1/hsqldb/src/org/hsqldb/util/DatabaseManagerSwing.java|(19065,2326,<478,45>,<539,9>)>
-Number of cloned lines:         7471
-Percentage of cloned lines:     4.415902213%
+Number of clones:               3952
+Number of clone classes:        386
+Biggest clone class:            <70,|project://hsqldb/src/org/hsqldb/server/Servlet.java|(9474,4474,<245,60>,<344,5>)>
+Number of cloned lines:         8703
+Percentage of cloned lines:     5.046797258%
 
 First two clone classes:
-<|project://hsqldb-2.3.1/hsqldb/src/org/hsqldb/RangeVariableResolver.java|(6894,282,<189,42>,<196,17>),1,"{\n                    int index = rangeVarSet.getIndex(range);\n\n                    if (index \> 0) {\n                        rangeVariables[index].isLeftJoin      = false;\n                        rangeVariables[index - 1].isRightJoin = false;\n                    }\n                }">
+<|project://hsqldb/src/org/hsqldb/test/TestLobs.java|(24182,249,<742,12>,<749,9>),2,"{\n            String ddl0 = \"DROP TABLE CLOBTEST IF EXISTS\";\n            String ddl1 =\n                \"CREATE TABLE CLOBTEST(ID IDENTITY, CLOBFIELD CLOB(100000))\";\n\n            statement.execute(ddl0);\n            statement.execute(ddl1);\n        }">
 
-<|project://hsqldb-2.3.1/hsqldb/src/org/hsqldb/Scanner.java|(47039,273,<1781,53>,<1788,21>),1,"{\n\n                        /** @todo 1.9.0 - review message malformed character set identifier */\n                        token.tokenType   = Tokens.X_MALFORMED_STRING;\n                        token.isMalformed = true;\n\n                        return;\n                    }">
+<|project://hsqldb/integration/hibernate/src/org/hibernate/dialect/HSQLDialect.java|(13357,846,<250,68>,<266,9>),1,"{\n                if ( hsqldbVersion \< 20 ) {\n                        return new StringBuffer( sql.length() + 10 )\n                                        .append( sql )\n                                        .insert(\n                                                        sql.toLowerCase().indexOf( \"select\" ) + 6,\n                                                        hasOffset ? \" limit ? ?\" : \" top ?\"\n                                        )\n                                        .toString();\n                }\n                else {\n                        return new StringBuffer( sql.length() + 20 )\n                                        .append( sql )\n                                        .append( hasOffset ? \" offset ? limit ?\" : \" limit ?\" )\n                                        .toString();\n                }\n        }">
 
 Code clone type-2:
-Number of clones:               5742
-Number of clone classes:        812
-Biggest clone class:            <81,|project://hsqldb-2.3.1/hsqldb/src/org/hsqldb/dbinfo/DatabaseInformationMain.java|(127755,4353,<3105,66>,<3207,5>)>
-Number of cloned lines:         19681
-Percentage of cloned lines:     11.63289673%
+Number of clones:               5802
+Number of clone classes:        841
+Biggest clone class:            <81,|project://hsqldb/src/org/hsqldb/dbinfo/DatabaseInformationMain.java|(127755,4353,<3105,66>,<3207,5>)>
+Number of cloned lines:         20890
+Percentage of cloned lines:     12.11393712%
 
 First two clone classes:
-<|project://hsqldb-2.3.1/hsqldb/src/org/hsqldb/ClientConnection.java|(12069,314,<371,57>,<380,5>),1,"{\n\n        if (mode != isAutoCommit) {\n            setAttribute(SessionInterface.INFO_AUTOCOMMIT, mode ? Boolean.TRUE\n                                                                : Boolean\n                                                                .FALSE);\n\n            isAutoCommit = mode;\n        }\n    }">
+<|project://hsqldb/src/org/hsqldb/types/ClobDataID.java|(6933,280,<221,57>,<231,5>),1,"{\n\n        ResultLob resultOut = ResultLob.newLobGetTruncateLength(id);\n        Result    resultIn  = session.execute(resultOut);\n\n        if (resultIn.isError()) {\n            throw resultIn.getException();\n        }\n\n        return ((ResultLob) resultIn).getBlockLength();\n    }">
 
-<|project://hsqldb-2.3.1/hsqldb/src/org/hsqldb/test/TestMerge.java|(2229,182,<59,27>,<67,5>),2,"{\n\n        super.setUp();\n\n        try {\n            connection = super.newConnection();\n            stmnt      = connection.createStatement();\n        } catch (Exception e) {}\n    }">
+<|project://hsqldb/src/org/hsqldb/map/BaseHashMap.java|(7750,127,<238,70>,<244,9>),1,"{\n            tempKey = longKeyTable[lookup];\n\n            if (key == tempKey) {\n                break;\n            }\n        }">
 ```
 
 ## tests
